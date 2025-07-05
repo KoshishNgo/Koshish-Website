@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,7 +27,7 @@ const AdminDashboard = () => {
         .select('amount');
       
       const totalDonations = donations?.length || 0;
-      const totalAmount = donations?.reduce((sum, d) => sum + parseFloat(d.amount), 0) || 0;
+      const totalAmount = donations?.reduce((sum, d) => sum + Number(d.amount), 0) || 0;
 
       // Fetch volunteers stats
       const { data: volunteers } = await supabase
@@ -177,7 +176,7 @@ const AdminDashboard = () => {
                   </div>
                   <div className="text-right">
                     <p className="font-bold text-green-600">
-                      {formatCurrency(parseFloat(donation.amount))}
+                      {formatCurrency(Number(donation.amount))}
                     </p>
                     <p className="text-xs text-gray-500 capitalize">{donation.payment_status}</p>
                   </div>
