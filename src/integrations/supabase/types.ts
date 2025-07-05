@@ -9,13 +9,246 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      blog_posts: {
+        Row: {
+          author_id: string
+          content: string
+          created_at: string
+          excerpt: string | null
+          id: string
+          image_url: string | null
+          published: boolean | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          content: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          image_url?: string | null
+          published?: boolean | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          id?: string
+          image_url?: string | null
+          published?: boolean | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      donations: {
+        Row: {
+          amount: number
+          anonymous: boolean | null
+          cause: string
+          created_at: string
+          currency: string | null
+          donor_email: string
+          donor_name: string
+          donor_phone: string | null
+          frequency: string | null
+          id: string
+          payment_id: string | null
+          payment_status: string | null
+          receipt_sent: boolean | null
+          user_id: string | null
+        }
+        Insert: {
+          amount: number
+          anonymous?: boolean | null
+          cause: string
+          created_at?: string
+          currency?: string | null
+          donor_email: string
+          donor_name: string
+          donor_phone?: string | null
+          frequency?: string | null
+          id?: string
+          payment_id?: string | null
+          payment_status?: string | null
+          receipt_sent?: boolean | null
+          user_id?: string | null
+        }
+        Update: {
+          amount?: number
+          anonymous?: boolean | null
+          cause?: string
+          created_at?: string
+          currency?: string | null
+          donor_email?: string
+          donor_name?: string
+          donor_phone?: string | null
+          frequency?: string | null
+          id?: string
+          payment_id?: string | null
+          payment_status?: string | null
+          receipt_sent?: boolean | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      gallery: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          id: string
+          image_url: string
+          tags: string[] | null
+          title: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url: string
+          tags?: string[] | null
+          title: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          image_url?: string
+          tags?: string[] | null
+          title?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          role: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          role?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          role?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      programs: {
+        Row: {
+          created_at: string
+          current_beneficiaries: number | null
+          description: string | null
+          goal_amount: number | null
+          id: string
+          image_url: string | null
+          raised_amount: number | null
+          status: string | null
+          target_beneficiaries: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_beneficiaries?: number | null
+          description?: string | null
+          goal_amount?: number | null
+          id?: string
+          image_url?: string | null
+          raised_amount?: number | null
+          status?: string | null
+          target_beneficiaries?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_beneficiaries?: number | null
+          description?: string | null
+          goal_amount?: number | null
+          id?: string
+          image_url?: string | null
+          raised_amount?: number | null
+          status?: string | null
+          target_beneficiaries?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      volunteers: {
+        Row: {
+          availability: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          motivation: string | null
+          phone: string | null
+          skills: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          availability?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          motivation?: string | null
+          phone?: string | null
+          skills?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          availability?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          motivation?: string | null
+          phone?: string | null
+          skills?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: { user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
