@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -35,7 +34,8 @@ const Volunteer = () => {
     interests: [] as string[],
     experience: "",
     why: "",
-    location: ""
+    location: "",
+    type: "volunteer"
   });
 
   const opportunities = [
@@ -46,7 +46,8 @@ const Volunteer = () => {
       commitment: "4-6 hours/week",
       location: "Delhi, Mumbai, Kolkata",
       requirements: "Basic education, patience with children",
-      benefits: ["Teaching experience", "Impact measurement", "Certificate"]
+      benefits: ["Teaching experience", "Impact measurement", "Certificate"],
+      type: "volunteer"
     },
     {
       icon: Heart,
@@ -55,7 +56,8 @@ const Volunteer = () => {
       commitment: "6-8 hours/week",
       location: "Delhi, Gurgaon",
       requirements: "Psychology background preferred, empathy",
-      benefits: ["Professional development", "Mentorship", "Training provided"]
+      benefits: ["Professional development", "Mentorship", "Training provided"],
+      type: "volunteer"
     },
     {
       icon: Scale,
@@ -64,7 +66,8 @@ const Volunteer = () => {
       commitment: "3-5 hours/week",
       location: "NCR Region",
       requirements: "Legal knowledge, document handling skills",
-      benefits: ["Legal experience", "Network building", "Skill development"]
+      benefits: ["Legal experience", "Network building", "Skill development"],
+      type: "volunteer"
     },
     {
       icon: Truck,
@@ -73,7 +76,48 @@ const Volunteer = () => {
       commitment: "8-10 hours/week",
       location: "Multiple locations",
       requirements: "Organizational skills, physical fitness",
-      benefits: ["Leadership experience", "Travel opportunities", "Impact measurement"]
+      benefits: ["Leadership experience", "Travel opportunities", "Impact measurement"],
+      type: "volunteer"
+    },
+    {
+      icon: GraduationCap,
+      title: "Social Work Internship",
+      description: "3-6 month internship program in community development and social work",
+      commitment: "Full-time (6 months)",
+      location: "Bihar (Multiple Districts)",
+      requirements: "Social work/sociology student, fieldwork interest",
+      benefits: ["Certificate", "Stipend", "Field experience", "Mentorship"],
+      type: "internship"
+    },
+    {
+      icon: Users,
+      title: "Digital Marketing Internship",
+      description: "Help manage our social media presence and digital campaigns",
+      commitment: "20-25 hours/week (3 months)",
+      location: "Remote/Patna",
+      requirements: "Marketing/communication student, social media skills",
+      benefits: ["Portfolio development", "Certificate", "Remote work experience"],
+      type: "internship"
+    },
+    {
+      icon: Heart,
+      title: "Research & Documentation Intern",
+      description: "Document impact stories and conduct research on social issues",
+      commitment: "15-20 hours/week (4 months)",
+      location: "Bihar/Remote",
+      requirements: "Research skills, writing ability, data analysis",
+      benefits: ["Research experience", "Published work", "Certificate", "References"],
+      type: "internship"
+    },
+    {
+      icon: Scale,
+      title: "Legal Research Internship",
+      description: "Assist with legal research and documentation for aid cases",
+      commitment: "Part-time (6 months)",
+      location: "Patna/Muzaffarpur",
+      requirements: "Law student (3rd year+), legal research skills",
+      benefits: ["Court experience", "Legal mentorship", "Certificate", "Stipend"],
+      type: "internship"
     }
   ];
 
@@ -120,15 +164,22 @@ const Volunteer = () => {
       return;
     }
 
-    toast.success("Thank you for your interest! We'll contact you within 48 hours.");
-    console.log("Volunteer application:", volunteerForm);
+    const applicationType = volunteerForm.type === 'internship' ? 'internship application' : 'volunteer application';
+    toast.success(`Thank you for your ${applicationType}! We'll contact you within 48 hours.`);
+    console.log(`${applicationType}:`, volunteerForm);
     
     // Reset form
     setVolunteerForm({
       name: "", email: "", phone: "", age: "", skills: "", availability: "",
-      interests: [], experience: "", why: "", location: ""
+      interests: [], experience: "", why: "", location: "", type: "volunteer"
     });
   };
+
+  const [selectedType, setSelectedType] = useState<"all" | "volunteer" | "internship">("all");
+  
+  const filteredOpportunities = opportunities.filter(opp => 
+    selectedType === "all" || opp.type === selectedType
+  );
 
   return (
     <div className="min-h-screen font-poppins">
@@ -139,7 +190,7 @@ const Volunteer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">Join Our Mission</h1>
           <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed mb-8">
-            Become a volunteer and make a direct impact in the lives of those who need it most.
+            Become a volunteer or intern and make a direct impact in the lives of those who need it most.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div>
@@ -206,26 +257,73 @@ const Volunteer = () => {
         </div>
       </section>
 
-      {/* Volunteer Opportunities */}
+      {/* Volunteer & Internship Opportunities */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Volunteer Opportunities</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Find the perfect role that matches your skills and passion.
+            <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Opportunities</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Find the perfect role that matches your skills and passion - whether as a volunteer or intern.
             </p>
+            
+            {/* Filter Buttons */}
+            <div className="flex justify-center space-x-4 mb-8">
+              <button
+                onClick={() => setSelectedType("all")}
+                className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                  selectedType === "all" 
+                    ? "bg-koshish-blue text-white" 
+                    : "bg-white text-koshish-blue border border-koshish-blue hover:bg-koshish-blue hover:text-white"
+                }`}
+              >
+                All Opportunities
+              </button>
+              <button
+                onClick={() => setSelectedType("volunteer")}
+                className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                  selectedType === "volunteer" 
+                    ? "bg-koshish-blue text-white" 
+                    : "bg-white text-koshish-blue border border-koshish-blue hover:bg-koshish-blue hover:text-white"
+                }`}
+              >
+                Volunteer Roles
+              </button>
+              <button
+                onClick={() => setSelectedType("internship")}
+                className={`px-6 py-2 rounded-full font-medium transition-colors ${
+                  selectedType === "internship" 
+                    ? "bg-koshish-blue text-white" 
+                    : "bg-white text-koshish-blue border border-koshish-blue hover:bg-koshish-blue hover:text-white"
+                }`}
+              >
+                Internships
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {opportunities.map((opportunity, index) => (
+            {filteredOpportunities.map((opportunity, index) => (
               <Card key={index} className="hover:shadow-xl transition-shadow">
                 <CardContent className="p-8">
                   <div className="flex items-start space-x-4 mb-6">
-                    <div className="w-12 h-12 bg-gradient-to-br from-koshish-blue to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      opportunity.type === 'internship' 
+                        ? 'bg-gradient-to-br from-green-500 to-teal-600' 
+                        : 'bg-gradient-to-br from-koshish-blue to-blue-600'
+                    }`}>
                       <opportunity.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-koshish-blue mb-2">{opportunity.title}</h3>
+                      <div className="flex items-center space-x-2 mb-2">
+                        <h3 className="text-xl font-bold text-koshish-blue">{opportunity.title}</h3>
+                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                          opportunity.type === 'internship' 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-blue-100 text-blue-800'
+                        }`}>
+                          {opportunity.type}
+                        </span>
+                      </div>
                       <p className="text-gray-600">{opportunity.description}</p>
                     </div>
                   </div>
@@ -256,8 +354,15 @@ const Volunteer = () => {
                     </ul>
                   </div>
 
-                  <Button className="w-full bg-koshish-gold text-koshish-blue hover:bg-yellow-400 font-semibold">
-                    Apply for This Role
+                  <Button 
+                    className={`w-full font-semibold ${
+                      opportunity.type === 'internship'
+                        ? 'bg-green-600 hover:bg-green-700 text-white'
+                        : 'bg-koshish-gold text-koshish-blue hover:bg-yellow-400'
+                    }`}
+                    onClick={() => setVolunteerForm({...volunteerForm, type: opportunity.type})}
+                  >
+                    Apply for This {opportunity.type === 'internship' ? 'Internship' : 'Role'}
                   </Button>
                 </CardContent>
               </Card>
@@ -322,6 +427,41 @@ const Volunteer = () => {
           <Card className="shadow-xl">
             <CardContent className="p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Application Type Selection */}
+                <div>
+                  <Label className="text-base font-medium mb-4 block">I'm applying for *</Label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id="volunteer"
+                        name="type"
+                        value="volunteer"
+                        checked={volunteerForm.type === "volunteer"}
+                        onChange={(e) => setVolunteerForm({...volunteerForm, type: e.target.value})}
+                        className="w-4 h-4 text-koshish-blue"
+                      />
+                      <label htmlFor="volunteer" className="text-sm font-medium">
+                        Volunteer Position
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        id="internship"
+                        name="type"
+                        value="internship"
+                        checked={volunteerForm.type === "internship"}
+                        onChange={(e) => setVolunteerForm({...volunteerForm, type: e.target.value})}
+                        className="w-4 h-4 text-green-600"
+                      />
+                      <label htmlFor="internship" className="text-sm font-medium">
+                        Internship Program
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Basic Information */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -396,11 +536,22 @@ const Volunteer = () => {
                   </div>
                 </div>
 
-                {/* Areas of Interest */}
+                {/* Updated Areas of Interest */}
                 <div>
                   <Label className="text-base font-medium mb-4 block">Areas of Interest (Select all that apply)</Label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {['Education Support', 'Women Empowerment', 'Legal Aid', 'Emergency Relief', 'Event Coordination', 'Fundraising'].map((interest) => (
+                    {[
+                      'Education Support', 
+                      'Women Empowerment', 
+                      'Legal Aid', 
+                      'Emergency Relief', 
+                      'Event Coordination', 
+                      'Fundraising',
+                      'Social Work Field Experience',
+                      'Digital Marketing',
+                      'Research & Documentation',
+                      'Legal Research'
+                    ].map((interest) => (
                       <div key={interest} className="flex items-center space-x-2">
                         <Checkbox 
                           id={interest}
@@ -449,8 +600,15 @@ const Volunteer = () => {
                   />
                 </div>
 
-                <Button type="submit" className="w-full bg-koshish-gold text-koshish-blue hover:bg-yellow-400 font-semibold text-lg py-4">
-                  Submit Application
+                <Button 
+                  type="submit" 
+                  className={`w-full font-semibold text-lg py-4 ${
+                    volunteerForm.type === 'internship'
+                      ? 'bg-green-600 hover:bg-green-700 text-white'
+                      : 'bg-koshish-gold text-koshish-blue hover:bg-yellow-400'
+                  }`}
+                >
+                  Submit {volunteerForm.type === 'internship' ? 'Internship' : 'Volunteer'} Application
                 </Button>
               </form>
             </CardContent>

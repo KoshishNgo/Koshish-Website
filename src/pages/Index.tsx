@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import WelcomeVideo from "@/components/WelcomeVideo";
+import TeamSection from "@/components/TeamSection";
+import BiharMap from "@/components/BiharMap";
 import { 
   Users, 
   Heart, 
@@ -142,6 +144,14 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Welcome Video Section */}
+      <WelcomeVideo 
+        title="Message from Our Founder - Dr. Rajesh Kumar"
+        description="Watch our founder share the vision and mission behind Koshish NGO's work in Bihar."
+        thumbnailUrl="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=450&fit=crop"
+        videoUrl="https://www.youtube.com/embed/dQw4w9WgXcQ"
+      />
+
       {/* Core Causes Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -180,6 +190,12 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Bihar Map Section */}
+      <BiharMap />
+
+      {/* Team Section */}
+      <TeamSection />
 
       {/* Testimonials Section */}
       <section className="py-20 bg-koshish-blue text-white">
