@@ -1,4 +1,5 @@
 
+import Navbar from "@/components/Navbar";
 import WelcomeVideo from "@/components/WelcomeVideo";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import TeamSection from "@/components/TeamSection";
@@ -8,6 +9,8 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-koshish-light-blue to-white">
+      <Navbar />
+      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-koshish-blue to-blue-800 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
