@@ -18,6 +18,8 @@ import {
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
+import AchievementsSection from "@/components/AchievementsSection";
+import BiharPoliticalMap from "@/components/BiharPoliticalMap";
 
 const Index = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -191,8 +193,14 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Bihar Political Map Section */}
+      <BiharPoliticalMap />
+
       {/* Bihar Map Section */}
       <BiharMap />
+
+      {/* Achievements Section */}
+      <AchievementsSection />
 
       {/* Team Section */}
       <TeamSection />

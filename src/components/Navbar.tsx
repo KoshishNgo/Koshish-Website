@@ -12,9 +12,20 @@ const Navbar = () => {
     { name: "About Us", href: "/about" },
     { name: "Programs", href: "/programs" },
     { name: "Gallery", href: "/gallery" },
+    { name: "Achievements", href: "/#achievements" },
     { name: "Volunteer", href: "/volunteer" },
     { name: "Contact", href: "/contact" },
+    { name: "Admin", href: "/admin" },
   ];
+
+  const scrollToSection = (href: string) => {
+    if (href.includes("#")) {
+      const element = document.getElementById(href.split("#")[1]);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50 font-poppins">
@@ -36,7 +47,8 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
-                  to={link.href}
+                  to={link.href.includes("#") ? "/" : link.href}
+                  onClick={() => link.href.includes("#") && scrollToSection(link.href)}
                   className="text-gray-700 hover:text-koshish-blue px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-koshish-light-blue"
                 >
                   {link.name}
@@ -72,9 +84,14 @@ const Navbar = () => {
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
-                  to={link.href}
+                  to={link.href.includes("#") ? "/" : link.href}
                   className="text-gray-700 hover:text-koshish-blue block px-3 py-2 rounded-md text-base font-medium"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    if (link.href.includes("#")) {
+                      scrollToSection(link.href);
+                    }
+                  }}
                 >
                   {link.name}
                 </Link>
