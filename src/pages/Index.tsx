@@ -186,7 +186,9 @@ const Index = () => {
       </section>
 
       {/* Achievements Section */}
-      <AchievementsSection />
+      <div id="achievements">
+        <AchievementsSection />
+      </div>
 
       {/* Team Section */}
       <TeamSection />

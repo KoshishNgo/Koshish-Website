@@ -41,15 +41,15 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+          {/* Desktop Navigation - Hidden on smaller screens, visible on large screens */}
+          <div className="hidden lg:block">
+            <div className="flex items-center space-x-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.href.includes("#") ? "/" : link.href}
                   onClick={() => link.href.includes("#") && scrollToSection(link.href)}
-                  className="text-gray-700 hover:text-koshish-blue px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-koshish-light-blue"
+                  className="text-gray-700 hover:text-koshish-blue px-2 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-koshish-light-blue whitespace-nowrap"
                 >
                   {link.name}
                 </Link>
@@ -57,20 +57,21 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Donate Button */}
-          <div className="hidden md:block">
+          {/* Donate Button - Desktop */}
+          <div className="hidden lg:block">
             <Link to="/donate">
-              <Button className="bg-koshish-gold text-koshish-blue hover:bg-yellow-400 font-semibold">
+              <Button className="bg-koshish-gold text-koshish-blue hover:bg-yellow-400 font-semibold px-6 py-2">
                 Donate Now
               </Button>
             </Link>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-koshish-blue p-2"
+              className="text-gray-700 hover:text-koshish-blue p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-koshish-blue"
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -79,13 +80,13 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
+          <div className="lg:hidden border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white max-h-96 overflow-y-auto">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.href.includes("#") ? "/" : link.href}
-                  className="text-gray-700 hover:text-koshish-blue block px-3 py-2 rounded-md text-base font-medium"
+                  className="text-gray-700 hover:text-koshish-blue hover:bg-koshish-light-blue block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
                   onClick={() => {
                     setIsMenuOpen(false);
                     if (link.href.includes("#")) {
@@ -96,11 +97,13 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <Link to="/donate" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full mt-2 bg-koshish-gold text-koshish-blue hover:bg-yellow-400 font-semibold">
-                  Donate Now
-                </Button>
-              </Link>
+              <div className="pt-2 pb-1">
+                <Link to="/donate" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full bg-koshish-gold text-koshish-blue hover:bg-yellow-400 font-semibold">
+                    Donate Now
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         )}
