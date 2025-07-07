@@ -1,6 +1,6 @@
 
 import { useEffect, useRef, useState } from "react";
-import { Award, Certificate, Trophy, Star } from "lucide-react";
+import { Award, Trophy, Star, FileText, Medal, Shield } from "lucide-react";
 
 const AchievementsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,7 +33,7 @@ const AchievementsSection = () => {
     {
       title: "Education Excellence Certificate",
       description: "For innovative street education programs",
-      icon: <Certificate className="w-8 h-8 text-blue-500" />,
+      icon: <FileText className="w-8 h-8 text-blue-500" />,
       year: "2023"
     },
     {
@@ -51,13 +51,13 @@ const AchievementsSection = () => {
     {
       title: "Legal Aid Excellence",
       description: "Exceptional legal support for marginalized groups",
-      icon: <Certificate className="w-8 h-8 text-red-500" />,
+      icon: <Shield className="w-8 h-8 text-red-500" />,
       year: "2022"
     },
     {
       title: "Volunteer Management Award",
       description: "Excellence in volunteer coordination and training",
-      icon: <Award className="w-8 h-8 text-indigo-500" />,
+      icon: <Medal className="w-8 h-8 text-indigo-500" />,
       year: "2021"
     },
     {
@@ -139,7 +139,7 @@ const AchievementsSection = () => {
               <span>8+ Awards</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Certificate className="w-4 h-4 text-blue-500" />
+              <FileText className="w-4 h-4 text-blue-500" />
               <span>Multiple Certifications</span>
             </div>
             <div className="flex items-center space-x-2">
