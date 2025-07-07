@@ -1,203 +1,186 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import AnimatedCounter from "@/components/AnimatedCounter";
+
 import WelcomeVideo from "@/components/WelcomeVideo";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import TeamSection from "@/components/TeamSection";
-import BiharMap from "@/components/BiharMap";
-import { 
-  Users, 
-  Heart, 
-  GraduationCap, 
-  Scale, 
-  Shield, 
-  Truck,
-  ChevronLeft,
-  ChevronRight
-} from "lucide-react";
 import AchievementsSection from "@/components/AchievementsSection";
-import BiharPoliticalMap from "@/components/BiharPoliticalMap";
+import Footer from "@/components/Footer";
 
 const Index = () => {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  const stats = [
-    { number: 5000, label: "Lives Touched", suffix: "+" },
-    { number: 150, label: "Volunteers", suffix: "" },
-    { number: 25, label: "Active Projects", suffix: "" },
-    { number: 8, label: "Years of Service", suffix: "" },
-  ];
-
-  const causes = [
-    {
-      icon: GraduationCap,
-      title: "Education Support",
-      description: "Providing quality education and learning resources to underprivileged children in urban slums and rural areas.",
-      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop",
-      color: "from-blue-500 to-cyan-600"
-    },
-    {
-      icon: Heart,
-      title: "Women Empowerment",
-      description: "Empowering women through skill development, entrepreneurship programs, and awareness campaigns.",
-      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=300&fit=crop",
-      color: "from-pink-500 to-rose-600"
-    },
-    {
-      icon: Scale,
-      title: "Legal Assistance",
-      description: "Free legal aid and counseling for migrant workers, women, and marginalized communities.",
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=300&fit=crop",
-      color: "from-purple-500 to-indigo-600"
-    },
-    {
-      icon: Truck,
-      title: "Emergency Relief",
-      description: "Immediate support during natural disasters, health emergencies, and community crises.",
-      image: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=300&fit=crop",
-      color: "from-green-500 to-teal-600"
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Priya Sharma",
-      role: "Beneficiary - Education Program",
-      content: "Thanks to Koshish NGO, my daughter now attends school regularly. The support they provided changed our family's future.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
-    },
-    {
-      name: "Rajesh Kumar",
-      role: "Volunteer",
-      content: "Being part of Koshish has been incredibly rewarding. Seeing the direct impact we make in people's lives motivates me every day.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-    },
-    {
-      name: "Anita Devi",
-      role: "Women Empowerment Program",
-      content: "The skill training program helped me start my own tailoring business. Now I can support my family independently.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
-    }
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
-
   return (
-    <div className="min-h-screen font-poppins">
-      <Navbar />
-      
+    <div className="min-h-screen bg-gradient-to-br from-koshish-light-blue to-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-koshish-blue via-blue-700 to-koshish-blue min-h-screen flex items-center">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1517022812141-23620dba5c23?w=1920&h=1080&fit=crop')"
-          }}
-        ></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <div className="animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Koshish NGO
-            </h1>
-            <p className="text-2xl md:text-3xl mb-4 text-koshish-gold font-semibold">
-              A Ray of Hope for the Hopeless
-            </p>
-            <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
-              Together for a Better Tomorrow - Supporting displaced, vulnerable, and marginalized communities through education, empowerment, and care.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link to="/donate">
-                <Button size="lg" className="bg-koshish-gold text-koshish-blue hover:bg-yellow-400 font-semibold text-lg px-8 py-4">
+      <section className="relative bg-gradient-to-r from-koshish-blue to-blue-800 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+                Building Hope, 
+                <span className="block text-koshish-gold">Transforming Lives</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-blue-100 leading-relaxed">
+                Koshish NGO works tirelessly to uplift communities through education, 
+                healthcare, and sustainable development initiatives across India.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a 
+                  href="/donate" 
+                  className="bg-koshish-gold text-koshish-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-400 transition-colors duration-300 text-center"
+                >
                   Donate Now
-                </Button>
-              </Link>
-              <Link to="/volunteer">
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white hover:text-koshish-blue font-semibold text-lg px-8 py-4">
-                  Join Us
-                </Button>
-              </Link>
+                </a>
+                <a 
+                  href="/volunteer" 
+                  className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-koshish-blue transition-colors duration-300 text-center"
+                >
+                  Join as Volunteer
+                </a>
+              </div>
+            </div>
+            <div className="lg:pl-12">
+              <WelcomeVideo />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Impact Statistics */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center animate-scale-in" style={{ animationDelay: `${index * 0.2}s` }}>
-                <AnimatedCounter end={stat.number} suffix={stat.suffix} />
-                <p className="text-gray-600 mt-2 font-medium">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Welcome Video Section */}
-      <WelcomeVideo 
-        title="Message from Our Founder - Dr. Rajesh Kumar"
-        description="Watch our founder share the vision and mission behind Koshish NGO's work in Bihar."
-        thumbnailUrl="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=450&fit=crop"
-        videoUrl="https://www.youtube.com/embed/dQw4w9WgXcQ"
-      />
-
-      {/* Core Causes Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Our Core Causes</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We focus on four key areas to create lasting impact in the lives of those who need it most.
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-koshish-blue mb-4">
+              Our Impact in Numbers
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Together, we have created meaningful change in thousands of lives across communities.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {causes.map((cause, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-fade-in" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
-                  <img 
-                    src={cause.image} 
-                    alt={cause.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${cause.color} opacity-80`}></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <cause.icon className="w-16 h-16 text-white" />
-                  </div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-koshish-blue mb-2">{cause.title}</h3>
-                  <p className="text-gray-600 mb-4">{cause.description}</p>
-                  <Link to="/programs">
-                    <Button variant="outline" className="w-full group-hover:bg-koshish-blue group-hover:text-white transition-colors">
-                      Learn More
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="text-center p-6 bg-gradient-to-br from-koshish-light-blue to-blue-50 rounded-xl">
+              <div className="text-4xl font-bold text-koshish-blue mb-2">
+                <AnimatedCounter end={15000} duration={2000} />+
+              </div>
+              <div className="text-gray-700 font-medium">Lives Touched</div>
+            </div>
+            <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl">
+              <div className="text-4xl font-bold text-green-600 mb-2">
+                <AnimatedCounter end={50} duration={2000} />+
+              </div>
+              <div className="text-gray-700 font-medium">Communities Served</div>
+            </div>
+            <div className="text-center p-6 bg-gradient-to-br from-yellow-50 to-amber-100 rounded-xl">
+              <div className="text-4xl font-bold text-amber-600 mb-2">
+                <AnimatedCounter end={200} duration={2000} />+
+              </div>
+              <div className="text-gray-700 font-medium">Active Volunteers</div>
+            </div>
+            <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-violet-100 rounded-xl">
+              <div className="text-4xl font-bold text-purple-600 mb-2">
+                <AnimatedCounter end={25} duration={2000} />+
+              </div>
+              <div className="text-gray-700 font-medium">Ongoing Projects</div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Bihar Political Map Section */}
-      <BiharPoliticalMap />
+      {/* Our Mission */}
+      <section className="py-16 bg-gradient-to-r from-koshish-blue to-blue-700 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Our Mission & Vision
+              </h2>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-semibold mb-3 text-koshish-gold">Mission</h3>
+                  <p className="text-blue-100 leading-relaxed">
+                    To empower underprivileged communities through sustainable development, 
+                    education, healthcare, and social welfare initiatives that create lasting positive change.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold mb-3 text-koshish-gold">Vision</h3>
+                  <p className="text-blue-100 leading-relaxed">
+                    A world where every individual has access to basic necessities, education, 
+                    and opportunities to thrive with dignity and hope.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+                <div className="text-3xl mb-3">🎓</div>
+                <h4 className="font-semibold mb-2">Education</h4>
+                <p className="text-sm text-blue-100">Quality education for all children</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+                <div className="text-3xl mb-3">🏥</div>
+                <h4 className="font-semibold mb-2">Healthcare</h4>
+                <p className="text-sm text-blue-100">Accessible medical care and awareness</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+                <div className="text-3xl mb-3">💼</div>
+                <h4 className="font-semibold mb-2">Livelihood</h4>
+                <p className="text-sm text-blue-100">Skill development and employment</p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+                <div className="text-3xl mb-3">🤝</div>
+                <h4 className="font-semibold mb-2">Community</h4>
+                <p className="text-sm text-blue-100">Strengthening social bonds</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Bihar Map Section */}
-      <BiharMap />
+      {/* Key Programs */}
+      <section id="programs" className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-koshish-blue mb-4">
+              Our Key Programs
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Comprehensive initiatives designed to address critical social issues and create sustainable impact.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-4xl mb-4">📚</div>
+              <h3 className="text-xl font-bold text-koshish-blue mb-3">Street Education Campaign</h3>
+              <p className="text-gray-600 mb-4">
+                Providing quality education to underprivileged children living on streets and in slums.
+              </p>
+              <div className="text-sm text-koshish-blue font-medium">200+ children enrolled</div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-4xl mb-4">👩‍💼</div>
+              <h3 className="text-xl font-bold text-koshish-blue mb-3">Women Empowerment</h3>
+              <p className="text-gray-600 mb-4">
+                Skill development programs and micro-finance support for women entrepreneurs.
+              </p>
+              <div className="text-sm text-koshish-blue font-medium">150+ women trained</div>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-4xl mb-4">⚖️</div>
+              <h3 className="text-xl font-bold text-koshish-blue mb-3">Legal Aid Support</h3>
+              <p className="text-gray-600 mb-4">
+                Free legal assistance and awareness programs for migrant workers and marginalized communities.
+              </p>
+              <div className="text-sm text-koshish-blue font-medium">100+ cases resolved</div>
+            </div>
+          </div>
+          <div className="text-center mt-12">
+            <a 
+              href="/programs" 
+              className="inline-block bg-koshish-blue text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300"
+            >
+              View All Programs
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Achievements Section */}
       <AchievementsSection />
@@ -205,69 +188,29 @@ const Index = () => {
       {/* Team Section */}
       <TeamSection />
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-koshish-blue text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Stories of Hope</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Hear from the people whose lives have been touched by our work.
-            </p>
-          </div>
-
-          <div className="relative max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-12">
-              <div className="flex items-center mb-6">
-                <img 
-                  src={testimonials[currentTestimonial].image} 
-                  alt={testimonials[currentTestimonial].name}
-                  className="w-16 h-16 rounded-full mr-4"
-                />
-                <div>
-                  <h4 className="text-xl font-semibold">{testimonials[currentTestimonial].name}</h4>
-                  <p className="text-koshish-gold">{testimonials[currentTestimonial].role}</p>
-                </div>
-              </div>
-              <p className="text-lg leading-relaxed italic">
-                "{testimonials[currentTestimonial].content}"
-              </p>
-            </div>
-
-            <div className="flex justify-center mt-8 space-x-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-colors ${
-                    index === currentTestimonial ? 'bg-koshish-gold' : 'bg-white/30'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="py-20 bg-gradient-to-r from-koshish-gold to-yellow-400">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-6">
-            Be the Change You Want to See
+      {/* Call to Action */}
+      <section className="py-16 bg-gradient-to-r from-koshish-gold to-yellow-400 text-koshish-blue">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Be Part of the Change
           </h2>
-          <p className="text-xl text-koshish-blue mb-8 max-w-3xl mx-auto">
-            Your support can transform lives. Join us in our mission to create a better tomorrow for those who need it most.
+          <p className="text-lg mb-8 text-blue-800">
+            Your support can transform lives and build stronger communities. 
+            Join us in our mission to create a better world for everyone.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/donate">
-              <Button size="lg" className="bg-koshish-blue text-white hover:bg-blue-800 font-semibold text-lg px-8 py-4">
-                Make a Donation
-              </Button>
-            </Link>
-            <Link to="/volunteer">
-              <Button size="lg" variant="outline" className="border-koshish-blue text-koshish-blue hover:bg-koshish-blue hover:text-white font-semibold text-lg px-8 py-4">
-                Become a Volunteer
-              </Button>
-            </Link>
+            <a 
+              href="/donate" 
+              className="bg-koshish-blue text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors duration-300"
+            >
+              Make a Donation
+            </a>
+            <a 
+              href="/volunteer" 
+              className="border-2 border-koshish-blue text-koshish-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-koshish-blue hover:text-white transition-colors duration-300"
+            >
+              Volunteer With Us
+            </a>
           </div>
         </div>
       </section>

@@ -1,156 +1,150 @@
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Award, Medal, Trophy, Shield, Star, Heart, Users, Globe } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Award, Certificate, Trophy, Star } from "lucide-react";
 
 const AchievementsSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   const achievements = [
     {
-      icon: Trophy,
       title: "Best NGO Award 2023",
-      description: "Recognized for outstanding community service and social impact across Bihar.",
-      color: "from-yellow-400 to-orange-500",
+      description: "Recognized for outstanding community service and impact",
+      icon: <Trophy className="w-8 h-8 text-yellow-500" />,
       year: "2023"
     },
     {
-      icon: Medal,
       title: "Education Excellence Certificate",
-      description: "Certified for exceptional work in promoting education in rural areas.",
-      color: "from-blue-500 to-cyan-600",
-      year: "2022"
-    },
-    {
-      icon: Shield,
-      title: "Women Empowerment Recognition",
-      description: "Honored for empowering women through skill development programs.",
-      color: "from-pink-500 to-rose-600",
+      description: "For innovative street education programs",
+      icon: <Certificate className="w-8 h-8 text-blue-500" />,
       year: "2023"
     },
     {
-      icon: Star,
-      title: "Community Impact Award",
-      description: "Acknowledged for creating lasting positive change in local communities.",
-      color: "from-purple-500 to-indigo-600",
+      title: "Women Empowerment Recognition",
+      description: "Outstanding contribution to women's skill development",
+      icon: <Award className="w-8 h-8 text-purple-500" />,
       year: "2022"
     },
     {
-      icon: Heart,
-      title: "Humanitarian Service Medal",
-      description: "Awarded for compassionate service during natural disasters and emergencies.",
-      color: "from-red-500 to-pink-600",
+      title: "Community Impact Award",
+      description: "Significant positive change in underserved communities",
+      icon: <Star className="w-8 h-8 text-green-500" />,
+      year: "2022"
+    },
+    {
+      title: "Legal Aid Excellence",
+      description: "Exceptional legal support for marginalized groups",
+      icon: <Certificate className="w-8 h-8 text-red-500" />,
+      year: "2022"
+    },
+    {
+      title: "Volunteer Management Award",
+      description: "Excellence in volunteer coordination and training",
+      icon: <Award className="w-8 h-8 text-indigo-500" />,
       year: "2021"
     },
     {
-      icon: Users,
-      title: "Volunteer Excellence Award",
-      description: "Recognized for building and maintaining an exceptional volunteer network.",
-      color: "from-green-500 to-teal-600",
-      year: "2023"
+      title: "Social Innovation Certificate",
+      description: "Creative solutions for social challenges",
+      icon: <Trophy className="w-8 h-8 text-orange-500" />,
+      year: "2021"
     },
     {
-      icon: Award,
-      title: "Legal Aid Service Certificate",
-      description: "Certified for providing quality legal assistance to marginalized communities.",
-      color: "from-gray-600 to-gray-800",
-      year: "2022"
-    },
-    {
-      icon: Globe,
-      title: "Sustainable Development Goals Recognition",
-      description: "Honored for significant contribution towards UN Sustainable Development Goals.",
-      color: "from-emerald-500 to-green-600",
-      year: "2023"
+      title: "Healthcare Initiative Recognition",
+      description: "Significant contribution to community health programs",
+      icon: <Star className="w-8 h-8 text-teal-500" />,
+      year: "2021"
     }
   ];
 
   return (
-    <section id="achievements" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section 
+      id="achievements" 
+      ref={sectionRef}
+      className="py-16 bg-gradient-to-br from-gray-50 to-blue-50"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4 animate-fade-in">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-koshish-blue mb-4">
             Achievements & Certificates
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            Recognitions, milestones, and the journey of impact that defines our commitment to social change.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Recognitions, milestones, and the journey of impact.
           </p>
         </div>
 
-        {/* Achievements Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {achievements.map((achievement, index) => (
-            <Card 
-              key={index} 
-              className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 animate-scale-in border-0 shadow-lg overflow-hidden"
-              style={{ animationDelay: `${index * 0.1}s` }}
+            <div
+              key={index}
+              className={`bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100 ${
+                isVisible 
+                  ? `animate-fade-in-up opacity-100` 
+                  : 'opacity-0 translate-y-8'
+              }`}
+              style={{
+                animationDelay: `${index * 150}ms`,
+                animationFillMode: 'forwards'
+              }}
             >
-              <div className="relative">
-                {/* Gradient Background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${achievement.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
-                
-                {/* Year Badge */}
-                <div className="absolute top-4 right-4 z-10">
-                  <Badge variant="secondary" className="bg-white/90 text-koshish-blue font-semibold">
-                    {achievement.year}
-                  </Badge>
+              <div className="flex flex-col items-center text-center space-y-4">
+                <div className="p-3 bg-gray-50 rounded-full">
+                  {achievement.icon}
                 </div>
-
-                <CardContent className="p-6 relative z-10">
-                  {/* Icon */}
-                  <div className="mb-4 relative">
-                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${achievement.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                      <achievement.icon className="w-8 h-8 text-white" />
-                    </div>
-                    
-                    {/* Glow Effect */}
-                    <div className={`absolute inset-0 w-16 h-16 rounded-full bg-gradient-to-br ${achievement.color} opacity-0 group-hover:opacity-30 blur-lg transition-opacity duration-300`}></div>
+                
+                <div className="space-y-2">
+                  <div className="text-sm font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                    {achievement.year}
                   </div>
-
-                  {/* Content */}
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-bold text-koshish-blue group-hover:text-blue-700 transition-colors duration-300 line-clamp-2">
-                      {achievement.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed line-clamp-3">
-                      {achievement.description}
-                    </p>
-                  </div>
-
-                  {/* Action Button */}
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="w-full group-hover:bg-koshish-blue group-hover:text-white group-hover:border-koshish-blue transition-all duration-300"
-                    >
-                      View Certificate
-                    </Button>
-                  </div>
-                </CardContent>
+                  <h3 className="font-bold text-lg text-gray-800 leading-tight">
+                    {achievement.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {achievement.description}
+                  </p>
+                </div>
+                
+                <button className="mt-4 px-4 py-2 bg-koshish-blue text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                  View Certificate
+                </button>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
 
-        {/* Statistics */}
-        <div className="mt-16 bg-white rounded-2xl shadow-lg p-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div className="animate-fade-in" style={{ animationDelay: '0.5s' }}>
-              <div className="text-3xl font-bold text-koshish-blue mb-2">8+</div>
-              <div className="text-gray-600 font-medium">Awards Received</div>
+        <div className="text-center mt-12">
+          <p className="text-gray-600 mb-6">
+            These recognitions motivate us to continue our mission of serving communities with dedication and excellence.
+          </p>
+          <div className="flex justify-center space-x-8 text-sm text-gray-500">
+            <div className="flex items-center space-x-2">
+              <Trophy className="w-4 h-4 text-yellow-500" />
+              <span>8+ Awards</span>
             </div>
-            <div className="animate-fade-in" style={{ animationDelay: '0.6s' }}>
-              <div className="text-3xl font-bold text-koshish-blue mb-2">5</div>
-              <div className="text-gray-600 font-medium">Years Recognized</div>
+            <div className="flex items-center space-x-2">
+              <Certificate className="w-4 h-4 text-blue-500" />
+              <span>Multiple Certifications</span>
             </div>
-            <div className="animate-fade-in" style={{ animationDelay: '0.7s' }}>
-              <div className="text-3xl font-bold text-koshish-blue mb-2">15+</div>
-              <div className="text-gray-600 font-medium">Certifications</div>
-            </div>
-            <div className="animate-fade-in" style={{ animationDelay: '0.8s' }}>
-              <div className="text-3xl font-bold text-koshish-blue mb-2">100%</div>
-              <div className="text-gray-600 font-medium">Transparency</div>
+            <div className="flex items-center space-x-2">
+              <Star className="w-4 h-4 text-green-500" />
+              <span>4+ Years of Excellence</span>
             </div>
           </div>
         </div>
