@@ -25,7 +25,7 @@ const Navbar = () => {
 
   const programsDropdownItems = [
     { name: "Active Program", href: "/active.html" },
-    { name: "Events", href: "/events" },
+    { name: "Campaigns", href: "/campaigns" },
     { name: "Report", href: "/report.html" },
   ];
 
