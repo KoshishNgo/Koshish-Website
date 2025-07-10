@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaigns - Koshish Charitable Trust</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 900px;
+            margin: 2rem;
+        }
+        .header {
+            color: #f5576c;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .back-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #f5576c;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        .back-link:hover {
+            background: #e14960;
+        }
+        .campaigns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .campaign-card {
+            background: #fff5f5;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid #f5576c;
+            transition: transform 0.3s ease;
+        }
+        .campaign-card:hover {
+            transform: translateY(-5px);
+        }
+        .campaign-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .campaign-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        .campaign-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status-upcoming {
+            background: #fef3c7;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Current Campaigns</h1>
+        <p class="subtitle">Join our ongoing and upcoming campaigns to make a positive impact</p>
+        
+        <div class="campaigns-grid">
+            <div class="campaign-card">
+                <h3 class="campaign-title">Winter Relief Drive 2025</h3>
+                <p class="campaign-description">Providing warm clothing and blankets to homeless families during the winter season. Your contribution can save lives.</p>
+                <span class="campaign-status status-active">Active</span>
+            </div>
+            
+            <div class="campaign-card">
+                <h3 class="campaign-title">Clean Water Initiative</h3>
+                <p class="campaign-description">Installing water purification systems in remote villages to ensure access to clean drinking water for all.</p>
+                <span class="campaign-status status-active">Active</span>
+            </div>
+            
+            <div class="campaign-card">
+                <h3 class="campaign-title">Digital Literacy Program</h3>
+                <p class="campaign-description">Teaching basic computer skills and digital literacy to rural youth to bridge the digital divide.</p>
+                <span class="campaign-status status-upcoming">Upcoming</span>
+            </div>
+            
+            <div class="campaign-card">
+                <h3 class="campaign-title">Women Empowerment Workshop</h3>
+                <p class="campaign-description">Skill development workshops focused on empowering women with vocational training and entrepreneurship skills.</p>
+                <span class="campaign-status status-upcoming">Upcoming</span>
+            </div>
+            
+            <div class="campaign-card">
+                <h3 class="campaign-title">Emergency Medical Fund</h3>
+                <p class="campaign-description">24/7 emergency medical assistance fund for critical cases in rural areas where immediate help is needed.</p>
+                <span class="campaign-status status-active">Active</span>
+            </div>
+            
+            <div class="campaign-card">
+                <h3 class="campaign-title">School Infrastructure</h3>
+                <p class="campaign-description">Building and renovating school buildings, libraries, and providing educational materials to improve learning environments.</p>
+                <span class="campaign-status status-upcoming">Upcoming</span>
+            </div>
+        </div>
+        
+        <a href="/" class="back-link">← Back to Home</a>
+    </div>
+</body>
+</html>

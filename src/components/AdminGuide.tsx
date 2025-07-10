@@ -11,7 +11,7 @@ const AdminGuide = () => {
           <Shield className="w-8 h-8 mr-3" />
           Admin Panel Access Guide
         </h1>
-        <p className="text-gray-600">Complete guide to accessing and using your NGO admin panel</p>
+        <p className="text-gray-600">Complete guide to accessing and using your Charitable Trust admin panel</p>
       </div>
 
       {/* Access Instructions */}

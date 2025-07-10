@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
@@ -95,6 +94,7 @@
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -102,6 +102,7 @@
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
@@ -119,6 +120,22 @@
 
   .animate-fade-in-up {
     animation: fade-in-up 0.6s ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+    opacity: 0;
   }
 
   /* Professional loading states */
@@ -151,6 +168,141 @@
 
   .shadow-professional-lg {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Custom Bihar Map Section Styles */
+  .bihar-map-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bihar-map-container img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .bihar-map-container:hover img {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
+
+  .district-card {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .district-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+  }
+
+  .district-card:hover::before {
+    left: 100%;
+  }
+
+  .district-card:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  .bihar-stats-card {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bihar-stats-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+  }
+
+  .bihar-stats-card:hover::before {
+    transform: rotate(45deg) scale(1.2);
+  }
+
+  /* Responsive Bihar Map */
+  @media (max-width: 768px) {
+    .bihar-map-container img {
+      max-height: 300px;
+    }
+    
+    .district-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+    }
+    
+    .bihar-history-box {
+      padding: 1rem;
+    }
+    
+    .bihar-history-box p {
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .district-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .bihar-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Animation for district cards */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .district-card {
+    animation: slideInUp 0.6s ease-out;
+  }
+
+  .district-card:nth-child(even) {
+    animation-delay: 0.1s;
+  }
+
+  .district-card:nth-child(3n) {
+    animation-delay: 0.2s;
+  }
+
+  /* Pulse animation for active districts indicator */
+  @keyframes pulse-green {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.1);
+    }
+  }
+
+  .animate-pulse-green {
+    animation: pulse-green 2s infinite;
   }
 }
 

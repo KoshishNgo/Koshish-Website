@@ -1,3 +1,13 @@
+-- PostgreSQL/Supabase Migration
+-- This file contains PostgreSQL-specific syntax for Supabase
+-- Create function to auto-update updated_at
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = now();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
 -- Create profiles table for user management
 CREATE TABLE public.profiles (
@@ -5,10 +15,14 @@ CREATE TABLE public.profiles (
   full_name TEXT,
   email TEXT,
   phone TEXT,
-  role TEXT DEFAULT 'user' CHECK (role IN ('admin', 'volunteer', 'donor', 'user')),
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
-  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+  role TEXT NOT NULL DEFAULT 'user' CHECK (role IN ('admin', 'volunteer', 'donor', 'user')),
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+CREATE TRIGGER update_profiles_updated_at
+BEFORE UPDATE ON public.profiles
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Create donations table
 CREATE TABLE public.donations (
@@ -16,7 +30,7 @@ CREATE TABLE public.donations (
   donor_name TEXT NOT NULL,
   donor_email TEXT NOT NULL,
   donor_phone TEXT,
-  amount DECIMAL(10,2) NOT NULL,
+  amount NUMERIC(10,2) NOT NULL,
   currency TEXT DEFAULT 'INR',
   cause TEXT NOT NULL,
   frequency TEXT DEFAULT 'one-time' CHECK (frequency IN ('one-time', 'monthly', 'yearly')),
@@ -25,8 +39,13 @@ CREATE TABLE public.donations (
   receipt_sent BOOLEAN DEFAULT false,
   anonymous BOOLEAN DEFAULT false,
   user_id UUID REFERENCES auth.users,
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+CREATE TRIGGER update_donations_updated_at
+BEFORE UPDATE ON public.donations
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Create volunteers table
 CREATE TABLE public.volunteers (
@@ -39,23 +58,32 @@ CREATE TABLE public.volunteers (
   motivation TEXT,
   status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'rejected')),
   user_id UUID REFERENCES auth.users,
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+CREATE TRIGGER update_volunteers_updated_at
+BEFORE UPDATE ON public.volunteers
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Create programs table
 CREATE TABLE public.programs (
   id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
   title TEXT NOT NULL,
   description TEXT,
-  goal_amount DECIMAL(10,2),
-  raised_amount DECIMAL(10,2) DEFAULT 0,
+  goal_amount NUMERIC(10,2),
+  raised_amount NUMERIC(10,2) DEFAULT 0,
   target_beneficiaries INTEGER,
   current_beneficiaries INTEGER DEFAULT 0,
   status TEXT DEFAULT 'active' CHECK (status IN ('active', 'completed', 'paused')),
   image_url TEXT,
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
-  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+CREATE TRIGGER update_programs_updated_at
+BEFORE UPDATE ON public.programs
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Create blog posts table
 CREATE TABLE public.blog_posts (
@@ -67,9 +95,13 @@ CREATE TABLE public.blog_posts (
   tags TEXT[],
   published BOOLEAN DEFAULT false,
   author_id UUID REFERENCES auth.users NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
-  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+CREATE TRIGGER update_blog_posts_updated_at
+BEFORE UPDATE ON public.blog_posts
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Create gallery table
 CREATE TABLE public.gallery (
@@ -79,8 +111,13 @@ CREATE TABLE public.gallery (
   image_url TEXT NOT NULL,
   category TEXT,
   tags TEXT[],
-  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+CREATE TRIGGER update_gallery_updated_at
+BEFORE UPDATE ON public.gallery
+FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Enable RLS on all tables
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
@@ -168,18 +205,19 @@ AS $$
 BEGIN
   INSERT INTO public.profiles (id, full_name, email, role)
   VALUES (
-    new.id,
-    new.raw_user_meta_data->>'full_name',
-    new.email,
+    NEW.id,
+    NEW.raw_user_meta_data->>'full_name',
+    NEW.email,
     'user'
   );
-  RETURN new;
+  RETURN NEW;
 END;
 $$;
 
+DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
-  FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
 
 -- Insert some sample data
 INSERT INTO public.programs (title, description, goal_amount, raised_amount, target_beneficiaries, current_beneficiaries, status) VALUES

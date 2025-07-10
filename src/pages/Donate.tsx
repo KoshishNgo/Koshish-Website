@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,13 +10,17 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectValue, SelectTrigger, SelectItem } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Heart, Shield, Users, Star } from "lucide-react";
+import { Heart, Shield, Users, Star, CreditCard, Building, FileText, Copy, CheckCircle } from "lucide-react";
+import { processPayment, getPaymentMethods, getBankDetails } from "@/services/paymentService";
 
 const Donate = () => {
   const [donationAmount, setDonationAmount] = useState("500");
   const [customAmount, setCustomAmount] = useState("");
   const [frequency, setFrequency] = useState("one-time");
   const [cause, setCause] = useState("general");
+  const [paymentMethod, setPaymentMethod] = useState("razorpay");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [showBankDetails, setShowBankDetails] = useState(false);
   const [donorInfo, setDonorInfo] = useState({
     name: "",
     email: "",
@@ -38,7 +43,10 @@ const Donate = () => {
     { value: "legal", label: "Legal Aid", icon: Shield },
   ];
 
-  const handleDonate = () => {
+  const paymentMethods = getPaymentMethods();
+  const bankDetails = getBankDetails();
+
+  const handleDonate = async () => {
     const amount = donationAmount === "custom" ? customAmount : donationAmount;
     
     if (!amount || !donorInfo.name || !donorInfo.email) {
@@ -46,19 +54,62 @@ const Donate = () => {
       return;
     }
 
-    // Simulate payment processing
-    toast.success("Thank you for your donation! Redirecting to payment gateway...");
-    
-    console.log("Donation details:", {
-      amount,
-      frequency,
-      cause,
-      donorInfo
+    if (parseInt(amount) < 10) {
+      toast.error("Minimum donation amount is ₹10");
+      return;
+    }
+
+    setIsProcessing(true);
+
+    try {
+      if (paymentMethod === "razorpay") {
+        const donationData = {
+          amount,
+          frequency,
+          cause,
+          donorInfo
+        };
+
+        const result = await processPayment(donationData);
+        
+        if (result.success) {
+          toast.success("Thank you for your donation! Payment successful.");
+          // You can save the payment details to your database here
+          console.log("Payment successful:", result);
+          
+          // Reset form or redirect to success page
+          // resetForm();
+        } else {
+          toast.error(result.error || "Payment failed. Please try again.");
+        }
+      } else if (paymentMethod === "bank_transfer") {
+        setShowBankDetails(true);
+        toast.info("Bank details displayed below. Please transfer the amount and send us the transaction details.");
+      } else {
+        toast.info("Please contact us for cheque/DD payment instructions.");
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+      toast.error("Payment processing failed. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      toast.success(`${label} copied to clipboard!`);
+    }).catch(() => {
+      toast.error("Failed to copy to clipboard");
     });
   };
 
   return (
     <div className="min-h-screen font-poppins">
+      <Helmet>
+        <title>Koshish NGO - Donate</title>
+        <meta name="description" content="Support Koshish NGO by making a donation and help us create a better tomorrow." />
+      </Helmet>
       <Navbar />
       
       {/* Hero Section */}
@@ -172,6 +223,30 @@ const Donate = () => {
                 </div>
               </div>
 
+              {/* Payment Method Selection */}
+              <div className="mb-8">
+                <Label className="text-lg font-semibold text-koshish-blue mb-4 block">Payment Method</Label>
+                <div className="space-y-3">
+                  {paymentMethods.map((method) => (
+                    <div 
+                      key={method.id} 
+                      className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+                        paymentMethod === method.id ? 'bg-koshish-light-blue border-koshish-blue' : 'hover:bg-gray-50'
+                      }`}
+                      onClick={() => setPaymentMethod(method.id)}
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="text-2xl">{method.icon}</div>
+                        <div>
+                          <div className="font-medium">{method.name}</div>
+                          <div className="text-sm text-gray-600">{method.description}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {/* Donor Information */}
               <div className="mb-8">
                 <Label className="text-lg font-semibold text-koshish-blue mb-4 block">Donor Information</Label>
@@ -228,7 +303,7 @@ const Donate = () => {
                 <div className="flex items-center space-x-2">
                   <Checkbox id="terms" />
                   <label htmlFor="terms" className="text-sm text-gray-600">
-                    I agree to receive updates about Koshish NGO's work and impact stories
+                    I agree to receive updates about Koshish Charitable Trust's work and impact stories
                   </label>
                 </div>
               </div>
@@ -255,10 +330,18 @@ const Donate = () => {
               {/* Payment Button */}
               <Button 
                 onClick={handleDonate}
+                disabled={isProcessing}
                 className="w-full bg-koshish-gold text-koshish-blue hover:bg-yellow-400 font-semibold text-lg py-4"
                 size="lg"
               >
-                Proceed to Payment
+                {isProcessing ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-koshish-blue border-t-transparent rounded-full animate-spin"></div>
+                    <span>Processing...</span>
+                  </div>
+                ) : (
+                  paymentMethod === "razorpay" ? "Pay Now" : "Get Payment Details"
+                )}
               </Button>
 
               {/* Security Notice */}
@@ -269,6 +352,152 @@ const Donate = () => {
               </div>
             </CardContent>
           </Card>
+
+          {/* Bank Details Section */}
+          {showBankDetails && paymentMethod === "bank_transfer" && (
+            <Card className="mt-8">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-bold text-koshish-blue mb-6 flex items-center">
+                  <Building className="w-6 h-6 mr-3" />
+                  Bank Transfer Details
+                </h3>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Indian Donations */}
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-4">For Indian Donations</h4>
+                    <div className="bg-gray-50 p-4 rounded-lg space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">Account Name:</span>
+                        <div className="flex items-center space-x-2">
+                          <span>{bankDetails.indian.name}</span>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => copyToClipboard(bankDetails.indian.name, "Account name")}
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">Account Number:</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-mono">{bankDetails.indian.accountNumber}</span>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => copyToClipboard(bankDetails.indian.accountNumber, "Account number")}
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">IFSC Code:</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-mono">{bankDetails.indian.ifsc}</span>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => copyToClipboard(bankDetails.indian.ifsc, "IFSC code")}
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">Bank:</span>
+                        <span>{bankDetails.indian.bankName}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* International Donations */}
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-semibold text-gray-800 mb-4">For International Donations</h4>
+                    <div className="bg-gray-50 p-4 rounded-lg space-y-3">
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">Account Name:</span>
+                        <div className="flex items-center space-x-2">
+                          <span>{bankDetails.fcra.name}</span>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => copyToClipboard(bankDetails.fcra.name, "Account name")}
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">Account Number:</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-mono">{bankDetails.fcra.accountNumber}</span>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => copyToClipboard(bankDetails.fcra.accountNumber, "Account number")}
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">IFSC Code:</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-mono">{bankDetails.fcra.ifsc}</span>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => copyToClipboard(bankDetails.fcra.ifsc, "IFSC code")}
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">SWIFT Code:</span>
+                        <div className="flex items-center space-x-2">
+                          <span className="font-mono">{bankDetails.fcra.swift}</span>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={() => copyToClipboard(bankDetails.fcra.swift, "SWIFT code")}
+                          >
+                            <Copy className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="font-medium">Bank:</span>
+                        <span>{bankDetails.fcra.bankName}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                  <div className="flex items-start space-x-3">
+                    <CheckCircle className="w-5 h-5 text-blue-600 mt-0.5" />
+                    <div className="text-sm">
+                      <p className="font-medium text-blue-800 mb-1">After transferring the amount:</p>
+                      <p className="text-blue-700">
+                        Please send us the transaction details (screenshot/receipt) to{" "}
+                        <a href="mailto:info@koshish.org" className="font-medium underline">
+                          info@koshish.org
+                        </a>{" "}
+                        or WhatsApp us at{" "}
+                        <a href="https://wa.me/919431234567" className="font-medium underline">
+                          +91 94312 34567
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </section>
 

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Programs - Koshish Charitable Trust</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 800px;
+            margin: 2rem;
+        }
+        .header {
+            color: #667eea;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .back-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+        .back-link:hover {
+            background: #5a6fd8;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .program-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .program-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .program-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Active Programs</h1>
+        <p class="subtitle">Our current initiatives making a difference in communities</p>
+        
+        <div class="programs-grid">
+            <div class="program-card">
+                <h3 class="program-title">Education Support</h3>
+                <p class="program-description">Providing educational resources and support to underprivileged children in Bihar.</p>
+            </div>
+            <div class="program-card">
+                <h3 class="program-title">Healthcare Access</h3>
+                <p class="program-description">Mobile health clinics and medical aid for rural communities.</p>
+            </div>
+            <div class="program-card">
+                <h3 class="program-title">Skill Development</h3>
+                <p class="program-description">Vocational training programs for youth and women empowerment.</p>
+            </div>
+            <div class="program-card">
+                <h3 class="program-title">Food Security</h3>
+                <p class="program-description">Nutrition programs and food distribution in affected areas.</p>
+            </div>
+        </div>
+        
+        <a href="/" class="back-link">← Back to Home</a>
+    </div>
+</body>
+</html>

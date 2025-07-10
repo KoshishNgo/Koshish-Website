@@ -1,0 +1,219 @@
+/* Bihar Map Interactive Styles */
+.bihar-map-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.district-path {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.district-path:hover {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)) brightness(1.1);
+  transform-origin: center;
+}
+
+.district-label {
+  transition: all 0.3s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Pulse animation for active districts */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.district-active {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Modal animations */
+.modal-backdrop {
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Tooltip styles */
+.district-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 1000;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .district-label {
+    font-size: 10px;
+  }
+  
+  .modal-content {
+    margin: 1rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+/* Loading animation for districts */
+@keyframes districtLoad {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.district-loading {
+  animation: districtLoad 0.6s ease-out forwards;
+}
+
+/* Glow effect for hovered districts */
+.district-glow {
+  filter: drop-shadow(0 0 8px #fbbf24) drop-shadow(0 0 16px #f59e0b);
+}
+
+/* Stats counter animation */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stats-counter {
+  animation: countUp 0.8s ease-out;
+}
+
+/* SVG path animations */
+.svg-path-animate {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawPath 2s ease-in-out forwards;
+}
+
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Interactive elements */
+.interactive-element {
+  transition: all 0.2s ease;
+}
+
+.interactive-element:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Button hover effects */
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Text animations */
+.text-shimmer {
+  background: linear-gradient(90deg, #6b7280 25%, #374151 50%, #6b7280 75%);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .bihar-map-container svg {
+    height: 300px;
+  }
+  
+  .district-label {
+    font-size: 8px;
+  }
+  
+  .modal-content {
+    margin: 0.5rem;
+    border-radius: 12px;
+  }
+}
+
+/* Accessibility improvements */
+.district-path:focus {
+  outline: 3px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .modal-backdrop {
+    display: none;
+  }
+  
+  .bihar-map-container {
+    break-inside: avoid;
+  }
+}

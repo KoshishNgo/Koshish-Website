@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -10,77 +10,86 @@ const Gallery = () => {
   const [filter, setFilter] = useState("all");
 
   const galleryItems = [
+    // Community Activities & Education
     {
       id: 1,
-      src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
-      alt: "Children in classroom",
+      src: "/images/pic 1.jpeg",
+      alt: "Community education session",
       category: "education",
-      title: "Mobile Education Unit in Action",
-      description: "Teaching children in a remote village through our mobile classroom program."
+      title: "Community Learning Initiative",
+      description: "Educational outreach program bringing learning opportunities directly to rural communities."
     },
     {
       id: 2,
-      src: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=600&h=400&fit=crop",
-      alt: "Women empowerment workshop",
-      category: "empowerment",
-      title: "Skill Development Workshop",
-      description: "Women learning tailoring skills as part of our empowerment program."
+      src: "/images/pic 2.jpeg",
+      alt: "Children's education program",
+      category: "education",
+      title: "Empowering Young Minds",
+      description: "Supporting children's education through innovative learning methods and community engagement."
     },
     {
       id: 3,
-      src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=400&fit=crop",
-      alt: "Legal aid session",
-      category: "legal",
-      title: "Legal Aid Consultation",
-      description: "Providing free legal consultation to migrant workers."
-    },
-    {
-      id: 4,
-      src: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&h=400&fit=crop",
-      alt: "Food distribution",
-      category: "relief",
-      title: "Emergency Food Distribution",
-      description: "Distributing food packets during the COVID-19 lockdown."
+      src: "/images/pic 3.jpeg",
+      alt: "Educational workshop in progress",
+      category: "education",
+      title: "Interactive Learning Workshop",
+      description: "Hands-on educational sessions designed to make learning engaging and accessible for all."
     },
     {
       id: 5,
-      src: "https://images.unsplash.com/photo-1517022812141-23620dba5c23?w=600&h=400&fit=crop",
-      alt: "Community gathering",
+      src: "/images/pic 5.jpeg",
+      alt: "Community gathering for awareness",
       category: "events",
-      title: "Community Awareness Program",
-      description: "Conducting awareness session about women's rights in rural areas."
+      title: "Community Awareness Campaign",
+      description: "Organizing awareness programs to educate communities about their rights and opportunities."
     },
     {
       id: 6,
-      src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
-      alt: "Children studying",
-      category: "education",
-      title: "Street Children Education",
-      description: "Teaching street children basic literacy and numeracy skills."
+      src: "/images/pic 6.jpeg",
+      alt: "Relief distribution event",
+      category: "relief",
+      title: "Emergency Relief Distribution",
+      description: "Providing essential supplies and support during times of crisis and natural disasters."
     },
     {
       id: 7,
-      src: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=600&h=400&fit=crop",
-      alt: "Women's shelter",
+      src: "/images/pic 7.jpeg",
+      alt: "Women empowerment session",
       category: "empowerment",
-      title: "Women's Rehabilitation Center",
-      description: "Safe shelter providing support to women escaping domestic violence."
+      title: "Women's Empowerment Program",
+      description: "Training and empowering women with skills and knowledge for economic independence."
     },
     {
       id: 8,
-      src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=400&fit=crop",
-      alt: "Volunteer training",
-      category: "events",
-      title: "Volunteer Training Session",
-      description: "Training new volunteers on community outreach programs."
+      src: "/images/pic 8.jpeg",
+      alt: "Legal aid consultation",
+      category: "legal",
+      title: "Legal Aid & Consultation",
+      description: "Providing free legal consultation and support to marginalized communities."
     },
     {
       id: 9,
-      src: "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600&h=400&fit=crop",
-      alt: "Disaster relief",
-      category: "relief",
-      title: "Flood Relief Operations",
-      description: "Providing immediate relief to flood-affected families in Bihar."
+      src: "/images/pic 9.jpeg",
+      alt: "Youth engagement activity",
+      category: "events",
+      title: "Youth Leadership Development",
+      description: "Engaging youth in leadership activities and community development initiatives."
+    },
+    {
+      id: 10,
+      src: "/images/pic 10.jpeg",
+      alt: "Rural development program",
+      category: "education",
+      title: "Rural Development Initiative",
+      description: "Comprehensive rural development programs focusing on education and skill building."
+    },
+    {
+      id: 11,
+      src: "/images/pic 11.jpeg",
+      alt: "Community celebration event",
+      category: "events",
+      title: "Community Unity Celebration",
+      description: "Celebrating achievements and fostering unity within the communities we serve."
     }
   ];
 
@@ -90,13 +99,19 @@ const Gallery = () => {
     { value: "empowerment", label: "Women Empowerment", count: galleryItems.filter(item => item.category === "empowerment").length },
     { value: "legal", label: "Legal Aid", count: galleryItems.filter(item => item.category === "legal").length },
     { value: "relief", label: "Emergency Relief", count: galleryItems.filter(item => item.category === "relief").length },
-    { value: "events", label: "Events & Campaigns", count: galleryItems.filter(item => item.category === "events").length }
+    { value: "events", label: "Events & Campaigns", count: galleryItems.filter(item => item.category === "events").length },
+    { value: "team", label: "Our Team", count: galleryItems.filter(item => item.category === "team").length }
   ];
 
   const filteredItems = filter === "all" ? galleryItems : galleryItems.filter(item => item.category === filter);
 
   return (
     <div className="min-h-screen font-poppins">
+      <Helmet>
+        <title>Koshish NGO - Gallery</title>
+        <meta name="description" content="View the gallery of Koshish NGO's events, activities, and community work." />
+      </Helmet>
+      
       <Navbar />
       
       {/* Hero Section */}
@@ -167,43 +182,89 @@ const Gallery = () => {
         </div>
       </section>
 
+      {/* Achievements & Certificates Section */}
+      <section className="py-20 bg-gradient-to-br from-koshish-gold/10 to-yellow-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Recognition & Achievements</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our work has been recognized by various organizations and institutions for its impact and dedication.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-koshish-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-koshish-blue" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-koshish-blue mb-2">BSDM Certificate</h3>
+                <p className="text-gray-600">Certification for excellence in social development and community mobilization.</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-koshish-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-koshish-blue" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-koshish-blue mb-2">Namati Justice Prize</h3>
+                <p className="text-gray-600">Recognition for outstanding work in legal empowerment and access to justice.</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-koshish-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-koshish-blue" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-koshish-blue mb-2">Credibility Alliance</h3>
+                <p className="text-gray-600">Certified member of Credibility Alliance for transparency and accountability.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Video Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Stories in Motion</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Watch the stories of transformation and hope through our video testimonials.
+              Watch the stories of transformation and hope through our video testimonials and welcome message.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             <div className="relative">
               <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop" 
-                  alt="Educational success story"
+                <video 
+                  controls
                   className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-koshish-gold rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-koshish-blue ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                </div>
+                  poster="/images/pic 1.jpeg"
+                >
+                  <source src="/Welcome video.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
               <div className="mt-4">
-                <h3 className="text-xl font-semibold text-koshish-blue">From Streets to Success</h3>
-                <p className="text-gray-600">Watch Ravi's journey from a street child to a successful student.</p>
+                <h3 className="text-xl font-semibold text-koshish-blue">Welcome to Koshish</h3>
+                <p className="text-gray-600">An introduction to our mission, vision, and the communities we serve.</p>
               </div>
             </div>
 
             <div className="relative">
               <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=600&h=400&fit=crop" 
-                  alt="Women empowerment story"
+                  src="/images/pic 5.jpeg" 
+                  alt="Community impact story"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
@@ -215,8 +276,8 @@ const Gallery = () => {
                 </div>
               </div>
               <div className="mt-4">
-                <h3 className="text-xl font-semibold text-koshish-blue">Empowered and Independent</h3>
-                <p className="text-gray-600">Sunita's transformation from victim to successful entrepreneur.</p>
+                <h3 className="text-xl font-semibold text-koshish-blue">Community Impact Stories</h3>
+                <p className="text-gray-600">Real stories of transformation from the communities we work with.</p>
               </div>
             </div>
           </div>

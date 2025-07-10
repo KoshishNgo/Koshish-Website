@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -38,18 +38,16 @@ const Contact = () => {
       icon: MapPin,
       title: "Office Address",
       details: [
-        "Koshish NGO Headquarters",
-        "123 Hope Street, Community Center",
-        "New Delhi, India 110001"
+        "Koshish Charitable Trust",
+        "Abdin House, Fraser Rd, Lodipur",
+        "Patna, Bihar"
       ]
     },
     {
       icon: Phone,
-      title: "Contact Numbers",
+      title: "Contact Number",
       details: [
-        "Main Office: +91 11 2345-6789",
-        "Emergency Helpline: +91 98765-43210",
-        "Volunteer Coordinator: +91 99999-88888"
+        "+91 94310 21035"
       ]
     },
     {
@@ -67,40 +65,38 @@ const Contact = () => {
     {
       icon: Facebook,
       name: "Facebook",
-      url: "#",
-      handle: "@KoshishNGO"
+      url: "https://www.facebook.com/share/19V1DM2kYg/",
+      handle: "@KoshishTrust"
     },
     {
       icon: Instagram,
       name: "Instagram",
-      url: "#",
-      handle: "@koshish_ngo"
+      url: "https://www.instagram.com/koshishtrust?igsh=MW9oYjlnaGh1enJj",
+      handle: "@koshishtrust"
+    },
+    {
+      icon: Users, // Use Youtube icon if available, else fallback
+      name: "YouTube",
+      url: "https://youtube.com/@koshishcharitabletrust560?feature=shared",
+      handle: "YouTube"
     }
   ];
 
   const officeLocations = [
     {
-      city: "Delhi",
-      address: "123 Hope Street, Community Center, New Delhi 110001",
-      phone: "+91 11 2345-6789",
-      programs: ["Education Support", "Women Empowerment", "Legal Aid"]
-    },
-    {
-      city: "Mumbai",
-      address: "456 Care Avenue, Social Hub, Mumbai 400001",
-      phone: "+91 22 9876-5432",
-      programs: ["Street Education", "Emergency Relief"]
-    },
-    {
-      city: "Kolkata",
-      address: "789 Service Road, Help Center, Kolkata 700001",
-      phone: "+91 33 5555-4444",
-      programs: ["Women Empowerment", "Legal Aid"]
+      city: "KOSHISH CHARITABLE TRUST PATNA",
+      address: "Abdin House, Fraser Rd, Lodipur, Patna, Bihar",
+      phone: "+91 94310 21035",
+      programs: ["Education Support", "Women Empowerment", "Legal Aid", "Healthcare Support"]
     }
   ];
 
   return (
     <div className="min-h-screen font-poppins">
+      <Helmet>
+        <title>Koshish NGO - Contact</title>
+        <meta name="description" content="Contact Koshish NGO for support, queries, or partnership opportunities." />
+      </Helmet>
       <Navbar />
       
       {/* Hero Section */}
@@ -142,6 +138,8 @@ const Contact = () => {
                 <a
                   key={index}
                   href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-koshish-blue hover:text-blue-600 transition-colors"
                 >
                   <social.icon className="w-6 h-6" />
@@ -219,6 +217,16 @@ const Contact = () => {
             <div>
               <h2 className="text-3xl font-bold text-koshish-blue mb-8">Find Us</h2>
               <div className="relative h-96 bg-gray-200 rounded-lg overflow-hidden shadow-lg">
+                <a
+                  href="https://maps.app.goo.gl/FVxeiJnzXWS8J6eWA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 z-10"
+                  aria-label="Open in Google Maps"
+                  style={{ cursor: 'pointer' }}
+                >
+                  <span className="sr-only">Open in Google Maps</span>
+                </a>
                 <img 
                   src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=400&fit=crop"
                   alt="Office location map"
@@ -228,9 +236,19 @@ const Contact = () => {
                   <div className="bg-white p-6 rounded-lg shadow-lg text-center">
                     <MapPin className="w-8 h-8 text-koshish-blue mx-auto mb-2" />
                     <h3 className="font-bold text-koshish-blue">Main Office</h3>
-                    <p className="text-sm text-gray-600">123 Hope Street, New Delhi</p>
-                    <Button className="mt-3 bg-koshish-gold text-koshish-blue hover:bg-yellow-400 text-sm">
-                      Get Directions
+                    <p className="text-sm text-gray-600">Abdin House, Fraser Rd, Lodipur</p>
+                    <p className="text-sm text-gray-600">Patna, Bihar</p>
+                    <Button
+                      asChild
+                      className="mt-3 bg-koshish-gold text-koshish-blue hover:bg-yellow-400 text-sm"
+                    >
+                      <a
+                        href="https://maps.app.goo.gl/FVxeiJnzXWS8J6eWA"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Get Directions
+                      </a>
                     </Button>
                   </div>
                 </div>
@@ -244,45 +262,47 @@ const Contact = () => {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Our Locations</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Our Location</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We operate across multiple cities to maximize our impact and reach.
+              We operate from Patna, Bihar to serve communities across the state.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {officeLocations.map((location, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-koshish-blue mb-4">{location.city} Office</h3>
-                  
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-start">
-                      <MapPin className="w-4 h-4 text-koshish-blue mr-2 mt-1 flex-shrink-0" />
-                      <span className="text-gray-600 text-sm">{location.address}</span>
+          <div className="grid grid-cols-1 justify-center">
+            <div className="max-w-md mx-auto">
+              {officeLocations.map((location, index) => (
+                <Card key={index} className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold text-koshish-blue mb-4">{location.city}</h3>
+                    
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-start">
+                        <MapPin className="w-4 h-4 text-koshish-blue mr-2 mt-1 flex-shrink-0" />
+                        <span className="text-gray-600 text-sm">{location.address}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Phone className="w-4 h-4 text-koshish-blue mr-2" />
+                        <span className="text-gray-600 text-sm">{location.phone}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center">
-                      <Phone className="w-4 h-4 text-koshish-blue mr-2" />
-                      <span className="text-gray-600 text-sm">{location.phone}</span>
-                    </div>
-                  </div>
 
-                  <div>
-                    <h4 className="font-semibold text-koshish-blue mb-2">Programs:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {location.programs.map((program, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 py-1 bg-koshish-light-blue text-koshish-blue text-xs rounded-full"
-                        >
-                          {program}
-                        </span>
-                      ))}
+                    <div>
+                      <h4 className="font-semibold text-koshish-blue mb-2">Programs:</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {location.programs.map((program, idx) => (
+                          <span
+                            key={idx}
+                            className="px-2 py-1 bg-koshish-light-blue text-koshish-blue text-xs rounded-full"
+                          >
+                            {program}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -298,7 +318,7 @@ const Contact = () => {
           <div className="space-y-6">
             {[
               {
-                question: "How can I donate to Koshish NGO?",
+                question: "How can I donate to Koshish Charitable Trust?",
                 answer: "You can donate through our secure online donation portal, by bank transfer, or by visiting our office. We accept one-time and recurring donations."
               },
               {

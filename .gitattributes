@@ -1,0 +1,6 @@
+# Set language detection for SQL files
+*.sql linguist-language=PLpgSQL
+**/supabase/migrations/*.sql linguist-language=PLpgSQL
+
+# Tailwind CSS files
+*.css linguist-language=CSS

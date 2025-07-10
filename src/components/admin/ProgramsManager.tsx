@@ -159,7 +159,7 @@ const ProgramsManager = () => {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-3xl font-bold text-koshish-blue">Programs Management</h2>
-          <p className="text-gray-600">Manage NGO programs and initiatives</p>
+          <p className="text-gray-600">Manage Charitable Trust programs and initiatives</p>
         </div>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>

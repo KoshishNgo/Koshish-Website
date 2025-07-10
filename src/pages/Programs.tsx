@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,6 +14,7 @@ import {
   MapPin,
   Target
 } from "lucide-react";
+import { Helmet } from 'react-helmet-async';
 
 const Programs = () => {
   const programs = [
@@ -110,6 +110,10 @@ const Programs = () => {
 
   return (
     <div className="min-h-screen font-poppins">
+      <Helmet>
+        <title>Koshish NGO - Programs</title>
+        <meta name="description" content="Explore the programs and initiatives by Koshish NGO for community empowerment." />
+      </Helmet>
       <Navbar />
       
       {/* Hero Section */}

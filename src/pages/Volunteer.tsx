@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -123,22 +124,16 @@ const Volunteer = () => {
 
   const volunteerTestimonials = [
     {
-      name: "Priya Mehta",
-      role: "Education Volunteer (2 years)",
-      content: "Volunteering at Koshish has been the most rewarding experience. Seeing children's faces light up when they learn something new is priceless.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+      name: "Srijan Mani Tripathi",
+      role: "Web Developer",
+      content: "Contributing to Koshish as a web developer has been a truly meaningful journey. Building digital tools that help real people and seeing the impact of my work on the community is incredibly fulfilling.",
+      image: "/images/srijan 2.jpeg"
     },
     {
-      name: "Rohit Kumar",
-      role: "Field Coordinator (1.5 years)",
-      content: "The experience has taught me so much about community work and leadership. I've grown both personally and professionally.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
-    },
-    {
-      name: "Anita Singh",
-      role: "Counseling Support (3 years)",
-      content: "Being able to support women in their journey to independence and safety gives my life purpose. It's changed my perspective completely.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+      name: "Aditya Raman",
+      role: "Web Developer",
+      content: "Volunteering at Koshish has allowed me to use my technical skills for a greater cause. The collaborative environment and the positive change we create together make every moment worthwhile.",
+      image: "/images/adi.jpeg"
     }
   ];
 
@@ -183,6 +178,11 @@ const Volunteer = () => {
 
   return (
     <div className="min-h-screen font-poppins">
+      <Helmet>
+        <title>Koshish NGO - Volunteer</title>
+        <meta name="description" content="Join Koshish NGO as a volunteer and make a difference in the community." />
+      </Helmet>
+      
       <Navbar />
       
       {/* Hero Section */}
@@ -360,7 +360,10 @@ const Volunteer = () => {
                         ? 'bg-green-600 hover:bg-green-700 text-white'
                         : 'bg-koshish-gold text-koshish-blue hover:bg-yellow-400'
                     }`}
-                    onClick={() => setVolunteerForm({...volunteerForm, type: opportunity.type})}
+                    onClick={() => {
+                      document.getElementById('volunteer-form-section')?.scrollIntoView({ behavior: 'smooth' });
+                      setVolunteerForm({ ...volunteerForm, type: opportunity.type });
+                    }}
                   >
                     Apply for This {opportunity.type === 'internship' ? 'Internship' : 'Role'}
                   </Button>
@@ -387,7 +390,7 @@ const Volunteer = () => {
                 <img 
                   src={volunteerTestimonials[currentTestimonial].image} 
                   alt={volunteerTestimonials[currentTestimonial].name}
-                  className="w-16 h-16 rounded-full mr-4"
+                  className="w-28 h-28 rounded-full mr-4 object-cover"
                 />
                 <div>
                   <h4 className="text-xl font-semibold">{volunteerTestimonials[currentTestimonial].name}</h4>
@@ -416,7 +419,7 @@ const Volunteer = () => {
 
       {/* Volunteer Application Form */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="volunteer-form-section" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Ready to Get Started?</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
