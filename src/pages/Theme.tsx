@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -17,198 +17,135 @@ import {
 } from "lucide-react";
 
 const Theme = () => {
-  const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
+  const [selectedTheme, setSelectedTheme] = useState<number | null>(null);
   const detailRef = useRef<HTMLDivElement>(null);
 
   const themes = [
     {
-      id: "human-rights",
-      title: "Human Rights & Fundamental Rights",
-      image: "/theme/human rights 1.jpeg",
-      fallbackImage: "/theme/human rights 2.jpeg",
-      icon: Scale,
-      quote: "All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.",
-      source: "Article 1, The Universal Declaration on Human Rights",
-      summary: "Our programmes focus on protection and promotion of Fundamental Rights including Right to Water & Food, Right to Health & Sanitation, Right to Work, Right to Shelter, Right to Clean Air & Environment, Land & Forest Rights, Right to Information, Right to Education, Right to Expression, Right to Culture and Right to Justice.",
-      activities: [
-        "Legal awareness programmes about existing laws",
-        "Better implementation of rule of laws",
-        "Protection of Constitutional & Fundamental Rights",
-        "Policy advocacy with Government departments"
-      ],
-      whyMatters: "Fundamental rights are the backbone of a just society. In many rural and marginalized communities, these rights are often overlooked or denied. Our work ensures that every individual is aware of and can claim their rights, leading to a more equitable society.",
-      successStory: "In 2024, Koshish helped a group of migrant workers in Bihar secure their right to fair wages and safe working conditions through legal aid and advocacy, setting a precedent for hundreds of others.",
-      getInvolved: "Volunteer for our legal awareness camps or help us document rights violations in your area.",
-      color: "border-blue-200 hover:border-blue-400",
-      bgColor: "bg-blue-50 hover:bg-blue-100"
-    },
-    {
-      id: "women-children",
-      title: "Women & Children Empowerment",
-      image: "/theme/women and children 1.jpeg",
-      fallbackImage: "/theme/women and children 2.jpeg",
-      icon: Users,
-      quote: "Children should be free from discrimination; government policies should be based on the best interests of the child; children should survive and develop to their full potential.",
-      source: "UNICEF",
-      summary: "KCT cares for the education and health of homeless, scheduled caste and tribe children. Activities are undertaken for better understanding of Constitutional & Fundamental Rights, gender equality, women's and children's rights and ending all kinds of violence against women and children.",
-      activities: [
-        "Education and health support for vulnerable children",
-        "Awareness campaigns on women's and children's rights",
-        "Training on anti-violence laws and policies",
-        "Policy advocacy highlighting issues in public domain"
-      ],
-      whyMatters: "Empowering women and children is crucial for sustainable development. It leads to healthier families, educated children, and stronger communities. Our work in this area helps to break the cycle of poverty and discrimination.",
-      successStory: "A notable success was the increase in school enrollment rates among girls in rural Bihar, from 40% to 75% in two years, due to our advocacy and support programmes.",
-      getInvolved: "Join our awareness campaigns or contribute to our education support initiatives.",
-      color: "border-rose-200 hover:border-rose-400",
-      bgColor: "bg-rose-50 hover:bg-rose-100"
-    },
-    {
-      id: "peace-harmony",
-      title: "Peace, Justice & Communal Harmony",
-      image: "/theme/peace and harmony 1.jpeg",
-      fallbackImage: "/theme/peace and harmony 2.jpeg",
-      icon: Heart,
-      quote: "JUSTICE, social, economic and political; LIBERTY of thought, expression, belief, faith and worship; EQUALITY of status and of opportunity.",
-      source: "Preamble of the Indian Constitution",
-      summary: "Campaign for promotion of tolerance, peace, communal harmony, fraternity, peaceful resolution of conflict, Constitutional Rights on religion & personal belief, cultural diversity and individual identity.",
-      activities: [
-        "Organizing meetings, seminars, and workshops",
-        "Cultural programmes and street plays",
-        "Puppet shows and awareness campaigns",
-        "Promoting tolerance and peaceful conflict resolution"
-      ],
-      whyMatters: "In a diverse country like India, communal harmony is essential for national integration and peace. Our initiatives in this area aim to reduce conflict and promote understanding among different communities.",
-      successStory: "Our peacebuilding workshops in riot-affected areas of Jharkhand have successfully brought together communities divided by conflict, leading to lasting peace and cooperation.",
-      getInvolved: "Participate in our peace marches or help in organizing community dialogues.",
-      color: "border-emerald-200 hover:border-emerald-400",
-      bgColor: "bg-emerald-50 hover:bg-emerald-100"
-    },
-    {
-      id: "panchayati-raj",
-      title: "Panchayati Raj System",
-      image: "/theme/panchayati raj system 1.jpeg",
-      fallbackImage: "/theme/panchayati raj system 2.jpeg",
-      icon: Building2,
-      quote: "The State shall take steps to organize village panchayats and endow them with such powers and authority as may be necessary to enable them to function as units of self-government.",
-      source: "Article 40, Directive Principles of State Policy, Indian Constitution",
-      summary: "The organization works for promotion of local self-governance, decentralized planning, resource mobilization, community monitoring and justice at grassroots level.",
-      activities: [
-        "Promoting local self-governance",
-        "Training PRI members on laws and rights",
-        "Decentralized planning and resource mobilization",
-        "Community monitoring and grassroots justice"
-      ],
-      whyMatters: "Strengthening the Panchayati Raj system is vital for grassroots democracy and development. It ensures that local bodies are empowered to make decisions and manage resources for their communities.",
-      successStory: "Our training programmes have successfully empowered over 1,000 Panchayat members in Bihar, enhancing their capacity to govern and serve their communities effectively.",
-      getInvolved: "Assist in our training sessions or help in monitoring and evaluation of Panchayati Raj institutions.",
-      color: "border-purple-200 hover:border-purple-400",
-      bgColor: "bg-purple-50 hover:bg-purple-100"
-    },
-    {
-      id: "environment",
-      title: "Protection & Conservation of Environment",
-      image: "/theme/protection and conservation of enviromnt 1.jpeg",
-      fallbackImage: "/theme/protection and conservation of enviroment 2.jpeg",
-      icon: Leaf,
-      quote: "The State shall endeavour to protect and improve the environment and to safeguard the forests and wild life of the country.",
-      source: "Article 48a, Directive Principles of State Policy, Indian Constitution",
-      summary: "Organization's responsibilities are to take initiatives for protection and conservation of environment, water-bodies, forest, biodiversity and wild life. Initiatives are undertaken for achieving balance between footprint and handprint in regard to sustainable development.",
-      activities: [
-        "Protection of environment and biodiversity",
-        "Conservation of water-bodies and forests",
-        "Wildlife protection initiatives",
-        "Sustainable development programmes"
-      ],
-      whyMatters: "Environmental conservation is crucial for sustainable development and the well-being of future generations. Our work in this area focuses on preserving biodiversity, combating climate change, and promoting sustainable use of resources.",
-      successStory: "Our afforestation drive in Jharkhand resulted in the planting of 100,000 trees, significantly improving local biodiversity and community awareness about environmental issues.",
-      getInvolved: "Join our tree plantation drives or contribute to our conservation education programmes.",
-      color: "border-green-200 hover:border-green-400",
-      bgColor: "bg-green-50 hover:bg-green-100"
-    },
-    {
-      id: "disaster-relief",
-      title: "Disaster Relief & Humanitarian Support",
-      image: "/theme/relief work and drr 1.jpeg",
-      fallbackImage: "/theme/relief work and drr 2.jpeg",
-      icon: Shield,
-      quote: "It aims to achieve the substantial reduction of disaster risk and losses in lives, livelihoods and health and in the economic, physical, social, cultural and environmental assets.",
-      source: "Sendai Framework for Disaster Risk Reduction 2015-2030",
-      summary: "We work to provide immediate relief to victims of natural and human induced disasters. We also try to ascertain the causes of calamities and assess its impact on environment, individuals, society and economy.",
-      activities: [
-        "Immediate relief to disaster victims",
-        "Disaster Risk Reduction (DRR) strategies",
-        "Community engagement in disaster planning",
-        "Impact assessment and mitigation measures"
-      ],
-      whyMatters: "Disaster risk reduction and humanitarian support are critical in building resilient communities. Our work ensures that vulnerable communities are prepared for disasters and can recover quickly when they occur.",
-      successStory: "Our intervention during the 2023 floods in Bihar provided immediate relief to over 50,000 affected individuals and facilitated their recovery and rehabilitation.",
-      getInvolved: "Support our disaster relief fund or volunteer in our disaster response teams.",
-      color: "border-orange-200 hover:border-orange-400",
-      bgColor: "bg-orange-50 hover:bg-orange-100"
-    },
-    {
-      id: "agriculture",
-      title: "Sustainable Agriculture",
-      image: "/theme/sustainable-agriculture.jpg",
-      fallbackImage: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=600&h=400&fit=crop",
-      icon: Sprout,
-      quote: "The State shall endeavour to organize agriculture and animal husbandry on modern and scientific lines.",
-      source: "Article 48, Directive Principles of State Policy, Indian Constitution",
-      summary: "Advocacy for Pro-farmers (Small and Marginal farmers), share croppers, agricultural labours and controlling input cost. The organization works for using modern technology with preservation of land, soil and environment.",
-      activities: [
-        "Natural farming model development",
-        "Urban rooftop farming and agroforestry",
-        "Carbon reduction through smokeless stoves",
-        "Preservation of traditional agricultural knowledge"
-      ],
-      whyMatters: "Sustainable agriculture is key to ensuring food security and livelihoods for all, especially in rural areas. Our initiatives promote environmentally friendly farming practices that enhance productivity and income for farmers.",
-      successStory: "The introduction of smokeless stoves in 5,000 households in rural Bihar has significantly reduced health hazards related to smoke inhalation and improved fuel efficiency.",
-      getInvolved: "Participate in our farming workshops or support our advocacy for farmer's rights.",
-      color: "border-amber-200 hover:border-amber-400",
-      bgColor: "bg-amber-50 hover:bg-amber-100"
-    },
-    {
-      id: "youth",
+      id: 1,
       title: "Youth Empowerment",
+      summary: "Empowering youth through education, skill-building, and leadership opportunities.",
       image: "/theme/youth 1.jpeg",
       fallbackImage: "/theme/youth 2.jpeg",
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
       icon: GraduationCap,
-      quote: "To empower youth of the country to achieve their full potential, and through them enable India to find its rightful place in the community of nations.",
-      source: "National Youth Policy, Govt. of India",
-      summary: "The organization works to enable youth to develop themselves to their potentialities and advocates with the government for youth centered policies. KCT cares for the education, health, personality development, livelihood of homeless, scheduled caste and tribe Youth.",
+      quote: "The youth are the hope of our future.",
+      source: "Jose Rizal",
       activities: [
-        "Education and health support for youth",
-        "Personality development programmes",
-        "Research on youth aspirations and problems",
-        "Encouraging participation in politics and social development"
+        "Career guidance workshops",
+        "Skill development programs",
+        "Leadership training",
+        "Youth engagement campaigns"
       ],
-      whyMatters: "Empowering youth is crucial for the development of a nation. Educated and skilled youth contribute to economic growth, social change, and cultural enrichment. Our work ensures that young people have the opportunities and support they need to succeed.",
-      successStory: "Our vocational training programme enabled 10,000 youth in Jharkhand to gain employment in various sectors, significantly improving their economic status and self-esteem.",
-      getInvolved: "Mentor a youth in your community or support our educational initiatives.",
-      color: "border-indigo-200 hover:border-indigo-400",
-      bgColor: "bg-indigo-50 hover:bg-indigo-100"
+      whyMatters: "Empowering youth is essential for building a progressive and dynamic society.",
+      successStory: "Many young individuals have found new opportunities and confidence through our youth programs.",
+      getInvolved: "Mentor, volunteer, or support our youth initiatives to help shape future leaders.",
     },
     {
-      id: "supreme-court",
-      title: "Advisor to Supreme Court Commissioners",
-      image: "/theme/advisor to the supreme court commissoner 1.jpeg",
-      fallbackImage: "/theme/advisor to the supreme court commissioner 2.jpeg",
-      icon: Gavel,
-      quote: "The Commissioners shall be at liberty to take the assistance of individuals and reliable organizations in the State and Union Territories.",
-      source: "PUCL vs UOI & others, Writ Petition (Civil) 196, 2001",
-      summary: "'Koshish' supports Advisor to Commissioners of the Supreme Court. Advisor works as a bridge between implementing authorities, Commissioners, beneficiaries and various citizens' groups.",
+      id: 2,
+      title: "Women & Children",
+      summary: "Supporting women and children for a brighter, safer, and healthier future.",
+      image: "/theme/women and children 1.jpeg",
+      fallbackImage: "/theme/women and children 2.jpeg",
+      color: "text-pink-600",
+      bgColor: "bg-pink-50",
+      icon: Users,
+      quote: "Every woman and child deserves a life of dignity and opportunity.",
+      source: "Unknown",
       activities: [
-        "Study on implementation of Right-based schemes",
-        "Regular updates and periodic reports to Commissioners",
-        "Organizing meetings with ministers and officials",
-        "Effective monitoring and redressal system"
+        "Health and nutrition camps",
+        "Education support",
+        "Protection and advocacy",
+        "Empowerment workshops"
       ],
-      whyMatters: "This role is crucial in ensuring that the rights of the marginalized and disadvantaged are protected and promoted at the highest levels of government. It helps in holding the state accountable for its obligations towards its citizens.",
-      successStory: "Our advocacy led to the implementation of a new policy in 2023 that improved the living conditions of thousands of homeless individuals in urban areas.",
-      getInvolved: "Support our research initiatives or help us in advocacy and awareness programmes.",
-      color: "border-slate-200 hover:border-slate-400",
-      bgColor: "bg-slate-50 hover:bg-slate-100"
+      whyMatters: "Women and children are the foundation of a healthy and prosperous society.",
+      successStory: "Our programs have helped women and children access vital resources and opportunities.",
+      getInvolved: "Volunteer or donate to support women and children in need.",
+    },
+    {
+      id: 3,
+      title: "Relief Work & Disaster Response",
+      summary: "Providing timely relief and building resilience in disaster-affected communities.",
+      image: "/theme/relief work and drr 1.jpeg",
+      fallbackImage: "/theme/relief work and drr 2.jpeg",
+      color: "text-orange-600",
+      bgColor: "bg-orange-50",
+      icon: Shield,
+      quote: "In times of crisis, every helping hand counts.",
+      source: "Unknown",
+      activities: [
+        "Emergency relief distribution",
+        "Disaster preparedness training",
+        "Community resilience building",
+        "Psychosocial support"
+      ],
+      whyMatters: "Disaster response saves lives and helps communities recover faster.",
+      successStory: "Thousands have received timely aid and support during disasters.",
+      getInvolved: "Join our relief efforts or contribute resources for disaster response.",
+    },
+    {
+      id: 4,
+      title: "Environment & Sustainable Agriculture",
+      summary: "Promoting eco-friendly practices and sustainable agriculture for a greener tomorrow.",
+      image: "/theme/enviroment and sustainable agriculture.jpeg",
+      fallbackImage: "/theme/protection and conservation of enviromnt 1.jpeg",
+      color: "text-green-600",
+      bgColor: "bg-green-50",
+      icon: Leaf,
+      quote: "Protecting the environment is protecting our future.",
+      source: "Unknown",
+      activities: [
+        "Tree plantation drives",
+        "Organic farming workshops",
+        "Clean-up campaigns",
+        "Sustainability awareness"
+      ],
+      whyMatters: "Sustainable agriculture and environment care are vital for future generations.",
+      successStory: "Our green initiatives have led to cleaner, greener communities.",
+      getInvolved: "Participate in eco-friendly events or support our sustainability projects.",
+    },
+    {
+      id: 5,
+      title: "Human Rights",
+      summary: "Advocating for justice, equality, and protection of human rights for all.",
+      image: "/theme/human rights 1.jpeg",
+      fallbackImage: "/theme/human rights 2.jpeg",
+      color: "text-red-600",
+      bgColor: "bg-red-50",
+      icon: Scale,
+      quote: "Human rights are for everyone, everywhere.",
+      source: "Unknown",
+      activities: [
+        "Legal aid camps",
+        "Rights awareness workshops",
+        "Advocacy campaigns",
+        "Community mobilization"
+      ],
+      whyMatters: "Human rights advocacy ensures dignity and justice for all.",
+      successStory: "Many have found justice and support through our human rights programs.",
+      getInvolved: "Support our advocacy or volunteer for rights awareness.",
+    },
+    {
+      id: 6,
+      title: "Peace & Harmony",
+      summary: "Fostering peace, harmony, and social cohesion within communities.",
+      image: "/theme/peace and harmony 1.jpeg",
+      fallbackImage: "/theme/peace and harmony 2.jpeg",
+      color: "text-purple-600",
+      bgColor: "bg-purple-50",
+      icon: Heart,
+      quote: "Peace begins with understanding and respect.",
+      source: "Unknown",
+      activities: [
+        "Interfaith dialogues",
+        "Community peace events",
+        "Conflict resolution workshops",
+        "Social harmony campaigns"
+      ],
+      whyMatters: "Peace and harmony are the foundation of a thriving society.",
+      successStory: "Our peace initiatives have brought communities together in understanding.",
+      getInvolved: "Join our peace-building activities or support harmony campaigns.",
     }
   ];
 

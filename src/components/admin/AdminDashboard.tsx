@@ -94,62 +94,62 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       <div>
-        <h2 className="text-3xl font-bold text-koshish-blue mb-2">Dashboard Overview</h2>
-        <p className="text-gray-600">Welcome to your admin dashboard. Here's what's happening.</p>
+        <h2 className="text-xl md:text-3xl font-bold text-koshish-blue mb-2">Dashboard Overview</h2>
+        <p className="text-sm md:text-base text-gray-600">Welcome to your admin dashboard. Here's what's happening.</p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+        <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Donations</CardTitle>
-            <Heart className="h-4 w-4 text-red-600" />
+            <CardTitle className="text-xs md:text-sm font-medium">Total Donations</CardTitle>
+            <Heart className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-lg md:text-2xl font-bold">
               <AnimatedCounter end={stats.totalDonations} />
             </div>
             <p className="text-xs text-muted-foreground">All time donations</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Amount</CardTitle>
-            <DollarSign className="h-4 w-4 text-green-600" />
+            <CardTitle className="text-xs md:text-sm font-medium">Total Amount</CardTitle>
+            <DollarSign className="h-3 w-3 md:h-4 md:w-4 text-green-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-lg md:text-2xl font-bold">
               {formatCurrency(stats.totalAmount)}
             </div>
             <p className="text-xs text-muted-foreground">Total funds raised</p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Volunteers</CardTitle>
-            <Users className="h-4 w-4 text-blue-600" />
+            <CardTitle className="text-xs md:text-sm font-medium">Volunteers</CardTitle>
+            <Users className="h-3 w-3 md:h-4 md:w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-lg md:text-2xl font-bold">
               <AnimatedCounter end={stats.totalVolunteers} />
             </div>
             <p className="text-xs text-muted-foreground">
-              {stats.pendingVolunteers} pending approval
+              <span className="text-orange-600 font-medium">{stats.pendingVolunteers}</span> pending
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="hover:shadow-lg transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Programs</CardTitle>
-            <TrendingUp className="h-4 w-4 text-purple-600" />
+            <CardTitle className="text-xs md:text-sm font-medium">Active Programs</CardTitle>
+            <TrendingUp className="h-3 w-3 md:h-4 md:w-4 text-purple-600" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-lg md:text-2xl font-bold">
               <AnimatedCounter end={stats.activePrograms} />
             </div>
             <p className="text-xs text-muted-foreground">Currently running</p>
@@ -160,22 +160,22 @@ const AdminDashboard = () => {
       {/* Recent Donations */}
       <Card>
         <CardHeader>
-          <CardTitle>Recent Donations</CardTitle>
+          <CardTitle className="text-base md:text-lg">Recent Donations</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4">
             {recentDonations.length > 0 ? (
               recentDonations.map((donation: any) => (
-                <div key={donation.id} className="flex items-center justify-between py-2 border-b last:border-0">
-                  <div>
-                    <p className="font-medium">{donation.donor_name}</p>
-                    <p className="text-sm text-gray-600">{donation.cause}</p>
+                <div key={donation.id} className="flex items-center justify-between py-2 md:py-3 border-b last:border-0">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm md:text-base truncate">{donation.donor_name}</p>
+                    <p className="text-xs md:text-sm text-gray-600 truncate">{donation.cause}</p>
                     <p className="text-xs text-gray-500">
                       {new Date(donation.created_at).toLocaleDateString()}
                     </p>
                   </div>
-                  <div className="text-right">
-                    <p className="font-bold text-green-600">
+                  <div className="text-right ml-4">
+                    <p className="font-bold text-green-600 text-sm md:text-base">
                       {formatCurrency(Number(donation.amount))}
                     </p>
                     <p className="text-xs text-gray-500 capitalize">{donation.payment_status}</p>
@@ -183,7 +183,11 @@ const AdminDashboard = () => {
                 </div>
               ))
             ) : (
-              <p className="text-gray-500 text-center py-4">No donations yet</p>
+              <div className="text-center py-8">
+                <Heart className="w-8 h-8 md:w-12 md:h-12 text-gray-400 mx-auto mb-3" />
+                <p className="text-sm md:text-base text-gray-500">No donations yet</p>
+                <p className="text-xs md:text-sm text-gray-400 mt-1">Donations will appear here once received</p>
+              </div>
             )}
           </div>
         </CardContent>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,6 +22,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Volunteer = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -41,101 +42,79 @@ const Volunteer = () => {
 
   const opportunities = [
     {
-      icon: GraduationCap,
-      title: "Education Volunteer",
-      description: "Teach children in our mobile classrooms and learning centers",
-      commitment: "4-6 hours/week",
-      location: "Delhi, Mumbai, Kolkata",
-      requirements: "Basic education, patience with children",
-      benefits: ["Teaching experience", "Impact measurement", "Certificate"],
-      type: "volunteer"
+      title: "Community Kitchen Volunteer",
+      type: "volunteer",
+      description: "Help us prepare and serve meals to those in need at our community kitchen.",
+      commitment: "3 hours/week",
+      location: "Delhi",
+      requirements: "Passion for cooking and helping others.",
+      benefits: ["Make a difference in the community", "Gain cooking experience", "Volunteer certificate"],
+      icon: Heart
     },
     {
-      icon: Heart,
-      title: "Counseling Support",
-      description: "Provide emotional support and counseling to women in our shelters",
-      commitment: "6-8 hours/week",
-      location: "Delhi, Gurgaon",
-      requirements: "Psychology background preferred, empathy",
-      benefits: ["Professional development", "Mentorship", "Training provided"],
-      type: "volunteer"
+      title: "Digital Marketing Intern",
+      type: "internship",
+      description: "Assist in managing our social media platforms and creating online marketing campaigns.",
+      commitment: "10 hours/week",
+      location: "Remote",
+      requirements: "Knowledge of social media platforms, basic graphic design skills.",
+      benefits: ["Learn about digital marketing", "Flexible working hours", "Stipend available"],
+      icon: Users
     },
     {
-      icon: Scale,
-      title: "Legal Aid Assistant",
-      description: "Help with documentation and basic legal procedures",
-      commitment: "3-5 hours/week",
-      location: "NCR Region",
-      requirements: "Legal knowledge, document handling skills",
-      benefits: ["Legal experience", "Network building", "Skill development"],
-      type: "volunteer"
+      title: "Event Coordination Volunteer",
+      type: "volunteer",
+      description: "Join our team in planning and executing community events and fundraisers.",
+      commitment: "Varies",
+      location: "Mumbai",
+      requirements: "Organizational skills, ability to work in a team.",
+      benefits: ["Gain event management experience", "Network with professionals", "Volunteer certificate"],
+      icon: GraduationCap
     },
     {
-      icon: Truck,
-      title: "Field Coordinator",
-      description: "Coordinate relief operations and community outreach programs",
-      commitment: "8-10 hours/week",
-      location: "Multiple locations",
-      requirements: "Organizational skills, physical fitness",
-      benefits: ["Leadership experience", "Travel opportunities", "Impact measurement"],
-      type: "volunteer"
-    },
-    {
-      icon: GraduationCap,
-      title: "Social Work Internship",
-      description: "3-6 month internship program in community development and social work",
-      commitment: "Full-time (6 months)",
-      location: "Bihar (Multiple Districts)",
-      requirements: "Social work/sociology student, fieldwork interest",
-      benefits: ["Certificate", "Stipend", "Field experience", "Mentorship"],
-      type: "internship"
-    },
-    {
-      icon: Users,
-      title: "Digital Marketing Internship",
-      description: "Help manage our social media presence and digital campaigns",
-      commitment: "20-25 hours/week (3 months)",
-      location: "Remote/Patna",
-      requirements: "Marketing/communication student, social media skills",
-      benefits: ["Portfolio development", "Certificate", "Remote work experience"],
-      type: "internship"
-    },
-    {
-      icon: Heart,
-      title: "Research & Documentation Intern",
-      description: "Document impact stories and conduct research on social issues",
-      commitment: "15-20 hours/week (4 months)",
-      location: "Bihar/Remote",
-      requirements: "Research skills, writing ability, data analysis",
-      benefits: ["Research experience", "Published work", "Certificate", "References"],
-      type: "internship"
-    },
-    {
-      icon: Scale,
-      title: "Legal Research Internship",
-      description: "Assist with legal research and documentation for aid cases",
-      commitment: "Part-time (6 months)",
-      location: "Patna/Muzaffarpur",
-      requirements: "Law student (3rd year+), legal research skills",
-      benefits: ["Court experience", "Legal mentorship", "Certificate", "Stipend"],
-      type: "internship"
+      title: "Research Intern",
+      type: "internship",
+      description: "Conduct research and assist in the development of project proposals and reports.",
+      commitment: "15 hours/week",
+      location: "Kolkata",
+      requirements: "Strong analytical skills, proficiency in MS Office.",
+      benefits: ["Enhance research skills", "Work on impactful projects", "Stipend available"],
+      icon: Scale
     }
   ];
 
   const volunteerTestimonials = [
     {
-      name: "Srijan Mani Tripathi",
-      role: "Web Developer",
-      content: "Contributing to Koshish as a web developer has been a truly meaningful journey. Building digital tools that help real people and seeing the impact of my work on the community is incredibly fulfilling.",
+      name: "SRIJAN MANI TRIPATHI",
+      role: "Web Developer Volunteer",
+      content: "Being part of Koshish as a web developer has been incredibly fulfilling. I had the opportunity to design and develop the complete Koshish NGO website, creating a digital platform that helps connect donors, volunteers, and beneficiaries. It's amazing to see how technology can amplify the impact of social work and help reach more people in need.",
       image: "/images/srijan 2.jpeg"
     },
     {
-      name: "Aditya Raman",
-      role: "Web Developer",
-      content: "Volunteering at Koshish has allowed me to use my technical skills for a greater cause. The collaborative environment and the positive change we create together make every moment worthwhile.",
+      name: "ADITYA RAMAN",
+      role: "Web Developer Volunteer", 
+      content: "Contributing to Koshish's digital transformation has been a rewarding journey. Working alongside the team to build and enhance the website allowed me to use my technical skills for a meaningful cause. Every line of code written helps the organization reach more people and create greater social impact in our communities.",
       image: "/images/adi.jpeg"
     }
   ];
+
+  // Auto-change testimonials every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial(prev => (prev + 1) % volunteerTestimonials.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [volunteerTestimonials.length]);
+
+  // Navigation functions for manual control
+  const nextTestimonial = () => {
+    setCurrentTestimonial(prev => (prev + 1) % volunteerTestimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial(prev => prev === 0 ? volunteerTestimonials.length - 1 : prev - 1);
+  };
 
   const handleInterestChange = (interest: string, checked: boolean) => {
     if (checked) {
@@ -151,23 +130,111 @@ const Volunteer = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!volunteerForm.name || !volunteerForm.email || !volunteerForm.phone) {
       toast.error("Please fill in all required fields");
       return;
     }
-
-    const applicationType = volunteerForm.type === 'internship' ? 'internship application' : 'volunteer application';
-    toast.success(`Thank you for your ${applicationType}! We'll contact you within 48 hours.`);
-    console.log(`${applicationType}:`, volunteerForm);
     
-    // Reset form
-    setVolunteerForm({
-      name: "", email: "", phone: "", age: "", skills: "", availability: "",
-      interests: [], experience: "", why: "", location: "", type: "volunteer"
-    });
+    const applicationType = volunteerForm.type === 'internship' ? 'internship application' : 'volunteer application';
+    
+    try {
+      // Save to Supabase
+      const { error } = await supabase.from("volunteer_applications").insert([
+        { ...volunteerForm }
+      ]);
+      
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
+      }
+
+      // Send email notification to admin
+      const emailBody = `
+New ${applicationType.toUpperCase()} Received:
+
+Personal Information:
+Name: ${volunteerForm.name}
+Email: ${volunteerForm.email}
+Phone: ${volunteerForm.phone}
+Age: ${volunteerForm.age || 'Not provided'}
+
+Application Details:
+Type: ${volunteerForm.type}
+Availability: ${volunteerForm.availability || 'Not provided'}
+Location: ${volunteerForm.location || 'Not provided'}
+
+Areas of Interest:
+${volunteerForm.interests.length > 0 ? volunteerForm.interests.join(', ') : 'None specified'}
+
+Skills & Qualifications:
+${volunteerForm.skills || 'Not provided'}
+
+Previous Experience:
+${volunteerForm.experience || 'Not provided'}
+
+Why they want to volunteer:
+${volunteerForm.why || 'Not provided'}
+
+---
+This application was submitted through the Koshish NGO website.
+`;
+
+      // Open default email client
+      const mailtoLink = `mailto:koshishngopatna@gmail.com?subject=New ${applicationType} from ${volunteerForm.name}&body=${encodeURIComponent(emailBody)}`;
+      window.open(mailtoLink);
+
+      toast.success(`Thank you for your ${applicationType}! We'll contact you within 48 hours.`);
+      setVolunteerForm({
+        name: "", email: "", phone: "", age: "", skills: "", availability: "",
+        interests: [], experience: "", why: "", location: "", type: "volunteer"
+      });
+      
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      
+      // Fallback to email only if Supabase fails
+      const emailBody = `
+New ${applicationType.toUpperCase()} (Backup):
+
+Personal Information:
+Name: ${volunteerForm.name}
+Email: ${volunteerForm.email}
+Phone: ${volunteerForm.phone}
+Age: ${volunteerForm.age || 'Not provided'}
+
+Application Details:
+Type: ${volunteerForm.type}
+Availability: ${volunteerForm.availability || 'Not provided'}
+Location: ${volunteerForm.location || 'Not provided'}
+
+Areas of Interest:
+${volunteerForm.interests.length > 0 ? volunteerForm.interests.join(', ') : 'None specified'}
+
+Skills & Qualifications:
+${volunteerForm.skills || 'Not provided'}
+
+Previous Experience:
+${volunteerForm.experience || 'Not provided'}
+
+Why they want to volunteer:
+${volunteerForm.why || 'Not provided'}
+
+---
+This application was submitted through the Koshish NGO website.
+Note: There was an issue saving to database, this is a backup email.
+`;
+
+      const mailtoLink = `mailto:koshishngopatna@gmail.com?subject=New ${applicationType} from ${volunteerForm.name}&body=${encodeURIComponent(emailBody)}`;
+      window.open(mailtoLink);
+      
+      toast.success("Your application has been prepared for email. An email client will open to send your application.");
+      setVolunteerForm({
+        name: "", email: "", phone: "", age: "", skills: "", availability: "",
+        interests: [], experience: "", why: "", location: "", type: "volunteer"
+      });
+    }
   };
 
   const [selectedType, setSelectedType] = useState<"all" | "volunteer" | "internship">("all");
@@ -302,74 +369,80 @@ const Volunteer = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {filteredOpportunities.map((opportunity, index) => (
-              <Card key={index} className="hover:shadow-xl transition-shadow">
-                <CardContent className="p-8">
-                  <div className="flex items-start space-x-4 mb-6">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
-                      opportunity.type === 'internship' 
-                        ? 'bg-gradient-to-br from-green-500 to-teal-600' 
-                        : 'bg-gradient-to-br from-koshish-blue to-blue-600'
-                    }`}>
-                      <opportunity.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <div className="flex items-center space-x-2 mb-2">
-                        <h3 className="text-xl font-bold text-koshish-blue">{opportunity.title}</h3>
-                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                          opportunity.type === 'internship' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-blue-100 text-blue-800'
-                        }`}>
-                          {opportunity.type}
-                        </span>
+            {filteredOpportunities.length === 0 ? (
+              <div className="col-span-2 text-center py-10">
+                <p className="text-lg text-gray-500">No opportunities found for the selected type.</p>
+              </div>
+            ) : (
+              filteredOpportunities.map((opportunity, index) => (
+                <Card key={index} className="hover:shadow-xl transition-shadow">
+                  <CardContent className="p-8">
+                    <div className="flex items-start space-x-4 mb-6">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
+                        opportunity.type === 'internship' 
+                          ? 'bg-gradient-to-br from-green-500 to-teal-600' 
+                          : 'bg-gradient-to-br from-koshish-blue to-blue-600'
+                      }`}>
+                        <opportunity.icon className="w-6 h-6 text-white" />
                       </div>
-                      <p className="text-gray-600">{opportunity.description}</p>
+                      <div>
+                        <div className="flex items-center space-x-2 mb-2">
+                          <h3 className="text-xl font-bold text-koshish-blue">{opportunity.title}</h3>
+                          <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                            opportunity.type === 'internship' 
+                              ? 'bg-green-100 text-green-800' 
+                              : 'bg-blue-100 text-blue-800'
+                          }`}>
+                            {opportunity.type}
+                          </span>
+                        </div>
+                        <p className="text-gray-600">{opportunity.description}</p>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Clock className="w-4 h-4 mr-2" />
-                      <span>Commitment: {opportunity.commitment}</span>
+                    <div className="space-y-3 mb-6">
+                      <div className="flex items-center text-sm text-gray-600">
+                        <Clock className="w-4 h-4 mr-2" />
+                        <span>Commitment: {opportunity.commitment}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-gray-600">
+                        <MapPin className="w-4 h-4 mr-2" />
+                        <span>Location: {opportunity.location}</span>
+                      </div>
+                      <div className="text-sm text-gray-600">
+                        <strong>Requirements:</strong> {opportunity.requirements}
+                      </div>
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      <span>Location: {opportunity.location}</span>
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      <strong>Requirements:</strong> {opportunity.requirements}
-                    </div>
-                  </div>
 
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-koshish-blue mb-2">Benefits:</h4>
-                    <ul className="space-y-1">
-                      {opportunity.benefits.map((benefit, idx) => (
-                        <li key={idx} className="text-sm text-gray-600 flex items-center">
-                          <div className="w-1.5 h-1.5 bg-koshish-gold rounded-full mr-2"></div>
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                    <div className="mb-6">
+                      <h4 className="font-semibold text-koshish-blue mb-2">Benefits:</h4>
+                      <ul className="space-y-1">
+                        {opportunity.benefits.map((benefit, idx) => (
+                          <li key={idx} className="text-sm text-gray-600 flex items-center">
+                            <div className="w-1.5 h-1.5 bg-koshish-gold rounded-full mr-2"></div>
+                            {benefit}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                  <Button 
-                    className={`w-full font-semibold ${
-                      opportunity.type === 'internship'
-                        ? 'bg-green-600 hover:bg-green-700 text-white'
-                        : 'bg-koshish-gold text-koshish-blue hover:bg-yellow-400'
-                    }`}
-                    onClick={() => {
-                      document.getElementById('volunteer-form-section')?.scrollIntoView({ behavior: 'smooth' });
-                      setVolunteerForm({ ...volunteerForm, type: opportunity.type });
-                    }}
-                  >
-                    Apply for This {opportunity.type === 'internship' ? 'Internship' : 'Role'}
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+                    <Button 
+                      className={`w-full font-semibold ${
+                        opportunity.type === 'internship'
+                          ? 'bg-green-600 hover:bg-green-700 text-white'
+                          : 'bg-koshish-gold text-koshish-blue hover:bg-yellow-400'
+                      }`}
+                      onClick={() => {
+                        document.getElementById('volunteer-form-section')?.scrollIntoView({ behavior: 'smooth' });
+                        setVolunteerForm({ ...volunteerForm, type: opportunity.type });
+                      }}
+                    >
+                      Apply for This {opportunity.type === 'internship' ? 'Internship' : 'Role'}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -378,9 +451,9 @@ const Volunteer = () => {
       <section className="py-20 bg-koshish-blue text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Hear from Our Volunteers</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Meet Our Web Development Team</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Stories from our dedicated volunteer community.
+              Dedicated volunteers who built this digital platform to amplify Koshish's mission.
             </p>
           </div>
 
@@ -413,6 +486,23 @@ const Volunteer = () => {
                 />
               ))}
             </div>
+
+            {/* Navigation arrows */}
+            <button
+              onClick={prevTestimonial}
+              className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 transition-all duration-300 hover:scale-105 shadow-lg"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft className="w-4 h-4 text-white" />
+            </button>
+            
+            <button
+              onClick={nextTestimonial}
+              className="absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 transition-all duration-300 hover:scale-105 shadow-lg"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight className="w-4 h-4 text-white" />
+            </button>
           </div>
         </div>
       </section>

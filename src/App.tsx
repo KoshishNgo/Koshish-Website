@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import Campaigns from "./pages/Campaigns";
+import LegalCompliance from "./pages/LegalCompliance";
 import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/campaigns" element={<Campaigns />} />
+            <Route path="/legal-compliance" element={<LegalCompliance />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

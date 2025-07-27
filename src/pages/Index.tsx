@@ -23,90 +23,90 @@ const Index = () => {
       <WelcomeVideo />
       
       {/* Impact Statistics */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-koshish-blue mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-koshish-blue mb-4">
               Our Impact in Numbers
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Together, we have created meaningful change in thousands of lives across communities.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="text-4xl font-bold text-koshish-blue mb-2">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            <div className="text-center p-4 sm:p-6 lg:p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-koshish-blue mb-2">
                 <AnimatedCounter end={15000} duration={2000} />+
               </div>
-              <div className="text-gray-700 font-medium">Lives Touched</div>
+              <div className="text-gray-700 font-medium text-xs sm:text-sm lg:text-base">Lives Touched</div>
             </div>
-            <div className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="text-4xl font-bold text-green-600 mb-2">
+            <div className="text-center p-4 sm:p-6 lg:p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 mb-2">
                 <AnimatedCounter end={50} duration={2000} />+
               </div>
-              <div className="text-gray-700 font-medium">Communities Served</div>
+              <div className="text-gray-700 font-medium text-xs sm:text-sm lg:text-base">Communities Served</div>
             </div>
-            <div className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="text-4xl font-bold text-amber-600 mb-2">
+            <div className="text-center p-4 sm:p-6 lg:p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-amber-600 mb-2">
                 <AnimatedCounter end={200} duration={2000} />+
               </div>
-              <div className="text-gray-700 font-medium">Active Volunteers</div>
+              <div className="text-gray-700 font-medium text-xs sm:text-sm lg:text-base">Active Volunteers</div>
             </div>
-            <div className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="text-4xl font-bold text-purple-600 mb-2">
+            <div className="text-center p-4 sm:p-6 lg:p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-purple-600 mb-2">
                 <AnimatedCounter end={25} duration={2000} />+
               </div>
-              <div className="text-gray-700 font-medium">Ongoing Projects</div>
+              <div className="text-gray-700 font-medium text-xs sm:text-sm lg:text-base">Ongoing Projects</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Our Mission */}
-      <section className="py-16 bg-gradient-to-r from-koshish-blue to-blue-700 text-white">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-koshish-blue to-blue-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
                 Our Mission & Vision
               </h2>
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-semibold mb-3 text-koshish-gold">Mission</h3>
-                  <p className="text-blue-100 leading-relaxed">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 text-koshish-gold">Mission</h3>
+                  <p className="text-blue-100 leading-relaxed text-sm sm:text-base">
                     To empower underprivileged communities through sustainable development, 
                     education, healthcare, and social welfare initiatives that create lasting positive change.
                   </p>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-3 text-koshish-gold">Vision</h3>
-                  <p className="text-blue-100 leading-relaxed">
+                  <h3 className="text-lg sm:text-xl font-semibold mb-3 text-koshish-gold">Vision</h3>
+                  <p className="text-blue-100 leading-relaxed text-sm sm:text-base">
                     A world where every individual has access to basic necessities, education, 
                     and opportunities to thrive with dignity and hope.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
-                <div className="text-3xl mb-3">🎓</div>
-                <h4 className="font-semibold mb-2">Education</h4>
-                <p className="text-sm text-blue-100">Quality education for all children</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg">
+                <div className="text-2xl sm:text-3xl mb-3">🎓</div>
+                <h4 className="font-semibold mb-2 text-sm sm:text-base">Education</h4>
+                <p className="text-xs sm:text-sm text-blue-100">Quality education for all children</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
-                <div className="text-3xl mb-3">🏥</div>
-                <h4 className="font-semibold mb-2">Healthcare</h4>
-                <p className="text-sm text-blue-100">Accessible medical care and awareness</p>
+              <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg">
+                <div className="text-2xl sm:text-3xl mb-3">🏥</div>
+                <h4 className="font-semibold mb-2 text-sm sm:text-base">Healthcare</h4>
+                <p className="text-xs sm:text-sm text-blue-100">Accessible medical care and awareness</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
-                <div className="text-3xl mb-3">💼</div>
-                <h4 className="font-semibold mb-2">Livelihood</h4>
-                <p className="text-sm text-blue-100">Skill development and employment</p>
+              <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg">
+                <div className="text-2xl sm:text-3xl mb-3">💼</div>
+                <h4 className="font-semibold mb-2 text-sm sm:text-base">Livelihood</h4>
+                <p className="text-xs sm:text-sm text-blue-100">Skill development and employment</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
-                <div className="text-3xl mb-3">🤝</div>
-                <h4 className="font-semibold mb-2">Community</h4>
-                <p className="text-sm text-blue-100">Strengthening social bonds</p>
+              <div className="bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-lg">
+                <div className="text-2xl sm:text-3xl mb-3">🤝</div>
+                <h4 className="font-semibold mb-2 text-sm sm:text-base">Community</h4>
+                <p className="text-xs sm:text-sm text-blue-100">Strengthening social bonds</p>
               </div>
             </div>
           </div>
@@ -149,6 +149,14 @@ const Index = () => {
               </p>
               <div className="text-sm text-koshish-blue font-medium">100+ cases resolved</div>
             </div>
+            <div className="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="text-4xl mb-4">🧑‍⚖️</div>
+              <h3 className="text-xl font-bold text-koshish-blue mb-3">Access to Justice</h3>
+              <p className="text-gray-600 mb-4">
+                Ensuring marginalized communities can access fair legal processes, representation, and justice through outreach, legal clinics, and advocacy.
+              </p>
+              <div className="text-sm text-koshish-blue font-medium">Legal clinics in 10+ districts</div>
+            </div>
           </div>
           <div className="text-center mt-12">
             <a 
@@ -172,7 +180,7 @@ const Index = () => {
               Our Reach Across Bihar
             </h3>
             <p className="text-lg text-gray-600 max-w-4xl mx-auto mb-8">
-              हम बिहार के 20+ जिलों में काम कर रहे हैं, समुदायों के जीवन में सकारात्मक बदलाव लाने के लिए विभिन्न कार्यक्रमों और पहलों के माध्यम से।
+              हम बिहार के 20+ जिलों में काम कर रहे हैं, समुदायों के जीवन में सकारात्मक बदलाव लाने के लिए विभिन्न कार्यक्रमों और पहलों के माध्यम से。
             </p>
             <p className="text-lg text-gray-600 max-w-4xl mx-auto">
               We work across 20+ districts of Bihar, bringing positive change to communities through our various programs and initiatives.

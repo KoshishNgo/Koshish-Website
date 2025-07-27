@@ -15,6 +15,7 @@ import {
   Target
 } from "lucide-react";
 import { Helmet } from 'react-helmet-async';
+import { useState, useEffect } from "react";
 
 const Programs = () => {
   const programs = [

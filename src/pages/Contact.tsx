@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { MapPin, Phone, Instagram, Facebook, Clock, Users } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [contactForm, setContactForm] = useState({
@@ -18,19 +19,76 @@ const Contact = () => {
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!contactForm.name || !contactForm.email || !contactForm.message) {
       toast.error("Please fill in all required fields");
       return;
     }
-
-    toast.success("Thank you for your message! We'll get back to you within 24 hours.");
-    console.log("Contact form submission:", contactForm);
     
-    // Reset form
-    setContactForm({ name: "", email: "", subject: "", message: "" });
+    try {
+      // Save to Supabase
+      const { error } = await supabase.from("contact_messages").insert([
+        {
+          name: contactForm.name,
+          email: contactForm.email,
+          subject: contactForm.subject,
+          message: contactForm.message
+        }
+      ]);
+      
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
+      }
+
+      // Send email notification to admin
+      const emailBody = `
+New Contact Message Received:
+
+Name: ${contactForm.name}
+Email: ${contactForm.email}
+Subject: ${contactForm.subject || 'No subject'}
+
+Message:
+${contactForm.message}
+
+---
+This message was sent from the Koshish NGO website contact form.
+`;
+
+      // Open default email client
+      const mailtoLink = `mailto:koshishngopatna@gmail.com?subject=New Contact Message from ${contactForm.name}&body=${encodeURIComponent(emailBody)}`;
+      window.open(mailtoLink);
+
+      toast.success("Thank you for your message! We'll get back to you within 24 hours.");
+      setContactForm({ name: "", email: "", subject: "", message: "" });
+      
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      
+      // Fallback to email only if Supabase fails
+      const emailBody = `
+New Contact Message (Backup):
+
+Name: ${contactForm.name}
+Email: ${contactForm.email}
+Subject: ${contactForm.subject || 'No subject'}
+
+Message:
+${contactForm.message}
+
+---
+This message was sent from the Koshish NGO website contact form.
+Note: There was an issue saving to database, this is a backup email.
+`;
+
+      const mailtoLink = `mailto:koshishngopatna@gmail.com?subject=New Contact Message from ${contactForm.name}&body=${encodeURIComponent(emailBody)}`;
+      window.open(mailtoLink);
+      
+      toast.success("Your message has been prepared for email. An email client will open to send your message.");
+      setContactForm({ name: "", email: "", subject: "", message: "" });
+    }
   };
 
   const contactInfo = [
@@ -47,7 +105,8 @@ const Contact = () => {
       icon: Phone,
       title: "Contact Number",
       details: [
-        "+91 94310 21035"
+        "+91 94310 21035",
+        "06122200354"
       ]
     },
     {
@@ -86,7 +145,7 @@ const Contact = () => {
     {
       city: "KOSHISH CHARITABLE TRUST PATNA",
       address: "Abdin House, Fraser Rd, Lodipur, Patna, Bihar",
-      phone: "+91 94310 21035",
+      phone: "+91 94310 21035, 06122200354",
       programs: ["Education Support", "Women Empowerment", "Legal Aid", "Healthcare Support"]
     }
   ];

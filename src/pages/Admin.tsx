@@ -10,6 +10,8 @@ import { useToast } from "@/hooks/use-toast";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import DonationsManager from "@/components/admin/DonationsManager";
 import VolunteersManager from "@/components/admin/VolunteersManager";
+import VolunteerApplicationsManager from "@/components/admin/VolunteerApplicationsManager";
+import ContactMessagesManager from "@/components/admin/ContactMessagesManager";
 import ProgramsManager from "@/components/admin/ProgramsManager";
 import BlogManager from "@/components/admin/BlogManager";
 import GalleryManager from "@/components/admin/GalleryManager";
@@ -164,31 +166,35 @@ const Admin = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <Shield className="w-8 h-8 text-koshish-blue mr-3" />
-              <h1 className="text-xl font-bold text-koshish-blue">Koshish Admin Panel</h1>
+              <Shield className="w-6 h-6 md:w-8 md:h-8 text-koshish-blue mr-2 md:mr-3" />
+              <h1 className="text-lg md:text-xl font-bold text-koshish-blue">Koshish Admin Panel</h1>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Welcome, Admin</span>
+            <div className="flex items-center space-x-2 md:space-x-4">
+              <span className="text-xs md:text-sm text-gray-600 hidden sm:block">Welcome, Admin</span>
               <Button onClick={handleLogout} variant="outline" size="sm">
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
+                <LogOut className="w-4 h-4 mr-0 md:mr-2" />
+                <span className="hidden md:inline">Logout</span>
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Tabs defaultValue="dashboard" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-            <TabsTrigger value="donations">Donations</TabsTrigger>
-            <TabsTrigger value="volunteers">Volunteers</TabsTrigger>
-            <TabsTrigger value="programs">Programs</TabsTrigger>
-            <TabsTrigger value="blog">Blog</TabsTrigger>
-            <TabsTrigger value="gallery">Gallery</TabsTrigger>
-            <TabsTrigger value="users">Users</TabsTrigger>
-          </TabsList>
+      <main className="max-w-7xl mx-auto px-2 md:px-4 lg:px-8 py-4 md:py-8">
+        <Tabs defaultValue="dashboard" className="space-y-4 md:space-y-6">
+          <div className="overflow-x-auto">
+            <TabsList className="grid w-full grid-cols-9 min-w-[800px] md:min-w-0">
+              <TabsTrigger value="dashboard" className="text-xs md:text-sm">Dashboard</TabsTrigger>
+              <TabsTrigger value="donations" className="text-xs md:text-sm">Donations</TabsTrigger>
+              <TabsTrigger value="volunteers" className="text-xs md:text-sm">Old Volunteers</TabsTrigger>
+              <TabsTrigger value="applications" className="text-xs md:text-sm">Applications</TabsTrigger>
+              <TabsTrigger value="messages" className="text-xs md:text-sm">Messages</TabsTrigger>
+              <TabsTrigger value="programs" className="text-xs md:text-sm">Programs</TabsTrigger>
+              <TabsTrigger value="blog" className="text-xs md:text-sm">Blog</TabsTrigger>
+              <TabsTrigger value="gallery" className="text-xs md:text-sm">Gallery</TabsTrigger>
+              <TabsTrigger value="users" className="text-xs md:text-sm">Users</TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="dashboard">
             <AdminDashboard />
@@ -200,6 +206,14 @@ const Admin = () => {
 
           <TabsContent value="volunteers">
             <VolunteersManager />
+          </TabsContent>
+
+          <TabsContent value="applications">
+            <VolunteerApplicationsManager />
+          </TabsContent>
+
+          <TabsContent value="messages">
+            <ContactMessagesManager />
           </TabsContent>
 
           <TabsContent value="programs">

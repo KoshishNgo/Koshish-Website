@@ -1,109 +1,184 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { supabase } from "@/integrations/supabase/client";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [filter, setFilter] = useState("all");
+  const [galleryItems, setGalleryItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const galleryItems = [
-    // Community Activities & Education
-    {
-      id: 1,
-      src: "/images/pic 1.jpeg",
-      alt: "Community education session",
-      category: "education",
-      title: "Community Learning Initiative",
-      description: "Educational outreach program bringing learning opportunities directly to rural communities."
-    },
-    {
-      id: 2,
-      src: "/images/pic 2.jpeg",
-      alt: "Children's education program",
-      category: "education",
-      title: "Empowering Young Minds",
-      description: "Supporting children's education through innovative learning methods and community engagement."
-    },
-    {
-      id: 3,
-      src: "/images/pic 3.jpeg",
-      alt: "Educational workshop in progress",
-      category: "education",
-      title: "Interactive Learning Workshop",
-      description: "Hands-on educational sessions designed to make learning engaging and accessible for all."
-    },
-    {
-      id: 5,
-      src: "/images/pic 5.jpeg",
-      alt: "Community gathering for awareness",
-      category: "events",
-      title: "Community Awareness Campaign",
-      description: "Organizing awareness programs to educate communities about their rights and opportunities."
-    },
-    {
-      id: 6,
-      src: "/images/pic 6.jpeg",
-      alt: "Relief distribution event",
-      category: "relief",
-      title: "Emergency Relief Distribution",
-      description: "Providing essential supplies and support during times of crisis and natural disasters."
-    },
-    {
-      id: 7,
-      src: "/images/pic 7.jpeg",
-      alt: "Women empowerment session",
-      category: "empowerment",
-      title: "Women's Empowerment Program",
-      description: "Training and empowering women with skills and knowledge for economic independence."
-    },
-    {
-      id: 8,
-      src: "/images/pic 8.jpeg",
-      alt: "Legal aid consultation",
-      category: "legal",
-      title: "Legal Aid & Consultation",
-      description: "Providing free legal consultation and support to marginalized communities."
-    },
-    {
-      id: 9,
-      src: "/images/pic 9.jpeg",
-      alt: "Youth engagement activity",
-      category: "events",
-      title: "Youth Leadership Development",
-      description: "Engaging youth in leadership activities and community development initiatives."
-    },
-    {
-      id: 10,
-      src: "/images/pic 10.jpeg",
-      alt: "Rural development program",
-      category: "education",
-      title: "Rural Development Initiative",
-      description: "Comprehensive rural development programs focusing on education and skill building."
-    },
-    {
-      id: 11,
-      src: "/images/pic 11.jpeg",
-      alt: "Community celebration event",
-      category: "events",
-      title: "Community Unity Celebration",
-      description: "Celebrating achievements and fostering unity within the communities we serve."
-    }
-  ];
+  useEffect(() => {
+    const fetchGallery = async () => {
+      setLoading(true);
+      
+      // Fallback/local images to always include
+      const fallbackImages = [
+        {
+          id: "local-1",
+          src: "/images/pic 1.jpeg",
+          alt: "Children participating in an educational workshop.",
+          title: "Education Workshop",
+          description: "Children participating in an educational workshop."
+        },
+        {
+          id: "local-2",
+          src: "/images/pic 2.jpeg",
+          alt: "Women empowerment session in progress.",
+          title: "Women Empowerment",
+          description: "Women empowerment session in progress."
+        },
+        {
+          id: "local-3",
+          src: "/images/pic 3.jpeg",
+          alt: "Community members at a health camp.",
+          title: "Health Camp",
+          description: "Community members at a health camp."
+        },
+        {
+          id: "local-4",
+          src: "/images/Food Distribution at MMuzaffarpur.JPG",
+          alt: "Food distribution at Muzaffarpur during relief efforts.",
+          title: "Food Distribution - Muzaffarpur",
+          description: "Food distribution at Muzaffarpur during relief efforts."
+        },
+        {
+          id: "local-5",
+          src: "/images/pic 6.jpeg",
+          alt: "Legal aid camp for rural families.",
+          title: "Legal Aid Camp",
+          description: "Legal aid camp for rural families."
+        },
+        {
+          id: "local-6",
+          src: "/images/pic 7.jpeg",
+          alt: "Team Koshish celebrating a successful campaign.",
+          title: "Successful Campaign",
+          description: "Team Koshish celebrating a successful campaign."
+        },
+        {
+          id: "local-7",
+          src: "/images/pic 8.jpeg",
+          alt: "Skill development training for youth.",
+          title: "Skill Development",
+          description: "Skill development training for youth."
+        },
+        {
+          id: "local-8",
+          src: "/images/pic 9.jpeg",
+          alt: "Environmental awareness rally.",
+          title: "Environment Rally",
+          description: "Environmental awareness rally."
+        },
+        {
+          id: "local-9",
+          src: "/images/pic 10.jpeg",
+          alt: "Volunteers planting trees for sustainability.",
+          title: "Tree Plantation",
+          description: "Volunteers planting trees for sustainability."
+        },
+        {
+          id: "local-10",
+          src: "/images/pic 11.jpeg",
+          alt: "Community outreach and engagement activities.",
+          title: "Community Outreach",
+          description: "Community outreach and engagement activities."
+        },
+        {
+          id: "local-11",
+          src: "/images/Dignity kits distribution in Patna (4).jpg",
+          alt: "Dignity kits distribution in Patna for women empowerment.",
+          title: "Dignity Kits Distribution - Patna",
+          description: "Dignity kits distribution in Patna for women empowerment."
+        },
+        {
+          id: "local-12",
+          src: "/images/DSC_8067.JPG",
+          alt: "Community development program documentation.",
+          title: "Community Development Program",
+          description: "Community development program documentation."
+        },
+        {
+          id: "local-13",
+          src: "/images/DSC_8079.JPG",
+          alt: "Field activities and community engagement.",
+          title: "Field Activities",
+          description: "Field activities and community engagement."
+        }
+      ];
 
-  const categories = [
-    { value: "all", label: "All", count: galleryItems.length },
-    { value: "education", label: "Education", count: galleryItems.filter(item => item.category === "education").length },
-    { value: "empowerment", label: "Women Empowerment", count: galleryItems.filter(item => item.category === "empowerment").length },
-    { value: "legal", label: "Legal Aid", count: galleryItems.filter(item => item.category === "legal").length },
-    { value: "relief", label: "Emergency Relief", count: galleryItems.filter(item => item.category === "relief").length },
-    { value: "events", label: "Events & Campaigns", count: galleryItems.filter(item => item.category === "events").length },
-    { value: "team", label: "Our Team", count: galleryItems.filter(item => item.category === "team").length }
-  ];
+      try {
+        // Fetch database images
+        const { data, error } = await supabase
+          .from('gallery')
+          .select('*')
+          .order('created_at', { ascending: false });
 
-  const filteredItems = filter === "all" ? galleryItems : galleryItems.filter(item => item.category === filter);
+        let databaseImages: any[] = [];
+        
+        if (!error && data) {
+          databaseImages = data
+            .filter((item: any) => {
+              // Filter out invalid URLs
+              const url = item.image_url;
+              if (!url || url.length < 10) return false;
+              if (url.startsWith('blob:')) return false;
+              if (!url.startsWith('http') && !url.startsWith('/')) return false;
+              return true;
+            })
+            .map((item: any) => ({
+              id: `db-${item.id}`,
+              src: item.image_url,
+              alt: item.description || item.title,
+              title: item.title,
+              description: item.description || "",
+              isFromDatabase: true
+            }));
+
+          // Temporary debug info for troubleshooting
+          if (data.length > 0) {
+            console.log('🔍 Admin Panel Debug Info:');
+            console.log(`   Total database entries: ${data.length}`);
+            console.log(`   Valid entries after filtering: ${databaseImages.length}`);
+            data.forEach((item, index) => {
+              console.log(`   ${index + 1}. "${item.title}" - ${item.image_url}`);
+            });
+          }
+        }
+
+        // Combine database images (first) with fallback images
+        const allImages = [...databaseImages, ...fallbackImages];
+        setGalleryItems(allImages);
+      } catch (error) {
+        console.error('Error fetching gallery:', error);
+        // If there's an error, just show fallback images
+        setGalleryItems(fallbackImages);
+      }
+      
+      setLoading(false);
+    };
+
+    fetchGallery();
+
+    // Set up real-time subscription for gallery updates
+    const subscription = supabase
+      .channel('gallery-changes')
+      .on('postgres_changes', 
+        { event: '*', schema: 'public', table: 'gallery' },
+        () => {
+          console.log('Gallery updated, refreshing...');
+          fetchGallery();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   return (
     <div className="min-h-screen font-poppins">
@@ -124,33 +199,11 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Filter Buttons */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <Button
-                key={category.value}
-                onClick={() => setFilter(category.value)}
-                variant={filter === category.value ? "default" : "outline"}
-                className={`${
-                  filter === category.value 
-                    ? "bg-koshish-blue text-white" 
-                    : "border-koshish-blue text-koshish-blue hover:bg-koshish-blue hover:text-white"
-                }`}
-              >
-                {category.label} ({category.count})
-              </Button>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Gallery Grid */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredItems.map((item, index) => (
+            {galleryItems.map((item, index) => (
               <div 
                 key={item.id} 
                 className="group cursor-pointer animate-fade-in"
@@ -162,7 +215,21 @@ const Gallery = () => {
                     src={item.src} 
                     alt={item.alt}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                    onError={(e) => {
+                      // Hide broken images completely
+                      const parentDiv = e.currentTarget.closest('.group') as HTMLElement;
+                      if (parentDiv) {
+                        parentDiv.style.display = 'none';
+                      }
+                    }}
                   />
+                  {item.isFromDatabase && (
+                    <div className="absolute top-2 right-2">
+                      <div className="bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                        New
+                      </div>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-4 left-4 right-4 text-white">
                       <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
@@ -174,9 +241,9 @@ const Gallery = () => {
             ))}
           </div>
 
-          {filteredItems.length === 0 && (
+          {galleryItems.length === 0 && (
             <div className="text-center py-20">
-              <p className="text-xl text-gray-600">No images found for the selected category.</p>
+              <p className="text-xl text-gray-600">No images found.</p>
             </div>
           )}
         </div>
@@ -248,36 +315,32 @@ const Gallery = () => {
                 <video 
                   controls
                   className="w-full h-full object-cover"
-                  poster="/images/pic 1.jpeg"
+                  poster="/logo/logo.png"
                 >
-                  <source src="/Welcome video.mp4" type="video/mp4" />
+                  <source src="/video 2.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
               <div className="mt-4">
-                <h3 className="text-xl font-semibold text-koshish-blue">Welcome to Koshish</h3>
-                <p className="text-gray-600">An introduction to our mission, vision, and the communities we serve.</p>
+                <h3 className="text-xl font-semibold text-koshish-blue">Malnutrition Management</h3>
+                <p className="text-gray-600">Our comprehensive programs addressing malnutrition and ensuring proper nutrition for vulnerable communities.</p>
               </div>
             </div>
 
             <div className="relative">
               <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
-                <img 
-                  src="/images/pic 5.jpeg" 
-                  alt="Community impact story"
+                <video 
+                  controls
                   className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                  <div className="w-16 h-16 bg-koshish-gold rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-koshish-blue ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                </div>
+                  poster="/logo/logo.png"
+                >
+                  <source src="/video 3.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
               <div className="mt-4">
-                <h3 className="text-xl font-semibold text-koshish-blue">Community Impact Stories</h3>
-                <p className="text-gray-600">Real stories of transformation from the communities we work with.</p>
+                <h3 className="text-xl font-semibold text-koshish-blue">History of Koshish</h3>
+                <p className="text-gray-600">Learn about our journey, milestones, and the evolution of our organization since 1997.</p>
               </div>
             </div>
           </div>

@@ -44,29 +44,29 @@ const programs = [
 const Events = () => (
 	<div className="min-h-screen flex flex-col font-poppins bg-gradient-to-br from-indigo-200 to-purple-200">
 		<Navbar />
-		<main className="flex-1 flex items-center justify-center py-12">
-			<div className="bg-white rounded-2xl shadow-2xl p-8 max-w-3xl w-full mx-4">
-				<h1 className="text-3xl md:text-4xl font-bold text-indigo-600 mb-2 text-center">
+		<main className="flex-1 flex items-center justify-center py-4 md:py-12 px-2">
+			<div className="bg-white rounded-2xl shadow-2xl p-4 md:p-8 max-w-3xl w-full mx-2 md:mx-4">
+				<h1 className="text-2xl md:text-4xl font-bold text-indigo-600 mb-2 text-center">
 					Events
 				</h1>
-				<p className="text-gray-600 text-center mb-8">
+				<p className="text-gray-600 text-center mb-6 md:mb-8 text-sm md:text-base">
 					Our current initiatives making a difference in communities
 				</p>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
 					{programs.map((p, i) => (
 						<div
 							key={i}
-							className="bg-gray-50 border-l-4 border-indigo-400 rounded-xl p-6 shadow hover:shadow-lg transition-transform hover:-translate-y-1 flex flex-col items-center"
+							className="bg-gray-50 border-l-4 border-indigo-400 rounded-xl p-4 md:p-6 shadow hover:shadow-lg transition-transform hover:-translate-y-1 flex flex-col items-center"
 						>
 							<img
 								src={p.image}
 								alt={p.title}
-								className="w-28 h-28 object-cover rounded-lg mb-4 shadow"
+								className="w-20 h-20 md:w-28 md:h-28 object-cover rounded-lg mb-3 md:mb-4 shadow"
 							/>
-							<h3 className="font-bold text-lg text-gray-800 mb-2 text-center">
+							<h3 className="font-bold text-base md:text-lg text-gray-800 mb-2 text-center">
 								{p.title}
 							</h3>
-							<p className="text-gray-600 text-sm whitespace-pre-line text-center">
+							<p className="text-gray-600 text-xs md:text-sm whitespace-pre-line text-center leading-relaxed">
 								{p.description}
 							</p>
 						</div>
@@ -75,7 +75,7 @@ const Events = () => (
 				<div className="text-center">
 					<a
 						href="/"
-						className="inline-block px-6 py-2 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 transition"
+						className="inline-block px-4 md:px-6 py-2 bg-indigo-500 text-white rounded-lg font-semibold hover:bg-indigo-600 transition text-sm md:text-base"
 					>
 						← Back to Home
 					</a>

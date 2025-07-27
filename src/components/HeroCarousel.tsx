@@ -68,7 +68,7 @@ const HeroCarousel = () => {
   };
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
+    <div className="relative w-full h-[60vh] sm:h-[70vh] md:h-[80vh] lg:h-[85vh] overflow-hidden">
       {/* Slides Container */}
       <div 
         className="flex w-full h-full transition-transform duration-700 ease-in-out"
@@ -90,29 +90,31 @@ const HeroCarousel = () => {
             
             {/* Content */}
             <div className="relative z-10 flex items-center justify-center h-full">
-              <div className="text-center text-white px-4 max-w-4xl mx-auto">
+              <div className="text-center text-white px-4 sm:px-6 md:px-8 max-w-6xl mx-auto">
                 <h1 
-                  className={`text-3xl md:text-5xl lg:text-6xl font-bold mb-4 transition-all duration-1000 ${
+                  className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-6 leading-tight transition-all duration-1000 drop-shadow-lg ${
                     index === currentSlide 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-8'
                   }`}
+                  style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
                 >
                   {slide.title}
                 </h1>
                 <p 
-                  className={`text-lg md:text-xl lg:text-2xl text-gray-200 max-w-2xl mx-auto transition-all duration-1000 delay-300 ${
+                  className={`text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto mb-6 md:mb-8 leading-relaxed transition-all duration-1000 delay-300 ${
                     index === currentSlide 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-8'
                   }`}
+                  style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}
                 >
                   {slide.description}
                 </p>
                 
                 {/* Call to Action Buttons */}
                 <div 
-                  className={`flex flex-col sm:flex-row gap-4 justify-center mt-8 transition-all duration-1000 delay-500 ${
+                  className={`flex flex-col sm:flex-row gap-4 justify-center items-center transition-all duration-1000 delay-500 ${
                     index === currentSlide 
                       ? 'opacity-100 translate-y-0' 
                       : 'opacity-0 translate-y-8'
@@ -120,13 +122,13 @@ const HeroCarousel = () => {
                 >
                   <a 
                     href="/donate" 
-                    className="bg-koshish-gold text-koshish-blue px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-400 transition-colors duration-300 transform hover:scale-105"
+                    className="bg-koshish-gold text-koshish-blue px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-yellow-400 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto text-center min-h-[44px] flex items-center justify-center"
                   >
                     Donate Now
                   </a>
                   <a 
                     href="/volunteer" 
-                    className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-koshish-blue transition-colors duration-300 transform hover:scale-105"
+                    className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-koshish-blue transition-all duration-300 transform hover:scale-105 w-full sm:w-auto text-center min-h-[44px] flex items-center justify-center"
                   >
                     Join Us
                   </a>
@@ -140,33 +142,35 @@ const HeroCarousel = () => {
       {/* Navigation Arrows */}
       <button
         onClick={previousSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-20 group"
+        className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 sm:p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-20 group min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform" />
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
       </button>
       
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-20 group"
+        className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 sm:p-3 rounded-full transition-all duration-300 backdrop-blur-sm z-20 group min-w-[44px] min-h-[44px] flex items-center justify-center"
         aria-label="Next slide"
       >
-        <ChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform" />
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+      <div className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3 z-20">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center ${
               index === currentSlide 
                 ? 'bg-white scale-125' 
                 : 'bg-white/50 hover:bg-white/75'
             }`}
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            <div className={`${index === currentSlide ? 'w-3 h-3 sm:w-4 sm:h-4' : 'w-2 h-2 sm:w-3 sm:h-3'} rounded-full bg-current`}></div>
+          </button>
         ))}
       </div>
 

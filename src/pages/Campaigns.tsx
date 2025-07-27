@@ -3,40 +3,24 @@ import Footer from "@/components/Footer";
 
 const campaigns = [
 	{
-		title: "Human Rights",
-		image: "/theme/human rights 1.jpeg",
-		description:
-			"Our Programmes and activities are focused on protection and promotion of Fundamental Rights: Right to Water & Food, Right to Health &Sanitation,Right to Work, Right to Shelter, Right to Clean Air & Environment, Land& Forest Rights, Right to Information, Right to Education, Right to Expression, Right to Culture and Right to Justice.\nURGENT",
+		title: "Campaign 1",
+		description: "Description for campaign 1",
+		image: "https://via.placeholder.com/150",
 	},
 	{
-		title: "Peace and Harmony",
-		image: "/theme/peace and harmony 1.jpeg",
-		description:
-			"Campaign for promotion of tolerance, peace, communal harmony, fraternity, peaceful resolution of conflict, Constitutional Rights on religion & personal belief, cultural diversity and individual identity is organized. Meetings, seminar, workshop, cultural programmes, puppet show, street plays etc. are programmed",
+		title: "Campaign 2",
+		description: "Description for campaign 2",
+		image: "https://via.placeholder.com/150",
 	},
 	{
-		title: "Women & Children",
-		image: "/theme/women and children 1.jpeg",
-		description:
-			"Activities are undertaken for better understanding of Constitutional & Fundamental Rights, gender equality, women’s and children’s rights and ending all kinds of violence against women and children.",
+		title: "Campaign 3",
+		description: "Description for campaign 3",
+		image: "https://via.placeholder.com/150",
 	},
 	{
-		title: "Youth",
-		image: "/theme/youth 1.jpeg",
-		description:
-			"The organization works to enable youth to develop themselves to their potentialities and advocates with the government for youth centered policies. It undertakes research study on aspiration and problems of youth. The organization strives to inculcate ideals of peace, communal harmony and community living and encourage youth to participate in politics and social development.",
-	},
-	{
-		title: "Local Self Governance",
-		image: "/theme/local self governance.jpeg",
-		description:
-			"The organization works for promotion of local self-governance, decentralize planning, resource mobilization, community monitoring and justice at grassroots level.",
-	},
-	{
-		title: "Environment and Sustainable Agriculture",
-		image: "/theme/enviroment and sustainable agriculture.jpeg",
-		description:
-			"Organization’s responsibilities are to take initiatives for protection and conservation of environment, water-bodies, forest, biodiversity and wild life. Initiatives are undertaken for achieving balance between footprint and handprint in regard to sustainable development. We work to provide immediate relief to victims of natural and human induced disasters. We also try to ascertain the causes of calamities and assess its impact on environment, individuals, society and economy",
+		title: "Campaign 4",
+		description: "Description for campaign 4",
+		image: "https://via.placeholder.com/150",
 	},
 ];
 

@@ -245,6 +245,255 @@ export type Database = {
         }
         Relationships: []
       }
+      volunteer_applications: {
+        Row: {
+          age: string | null
+          availability: string | null
+          created_at: string
+          email: string
+          experience: string | null
+          id: string
+          interests: string[] | null
+          location: string | null
+          name: string
+          phone: string
+          skills: string | null
+          status: string | null
+          type: string | null
+          updated_at: string
+          why: string | null
+        }
+        Insert: {
+          age?: string | null
+          availability?: string | null
+          created_at?: string
+          email: string
+          experience?: string | null
+          id?: string
+          interests?: string[] | null
+          location?: string | null
+          name: string
+          phone: string
+          skills?: string | null
+          status?: string | null
+          type?: string | null
+          updated_at?: string
+          why?: string | null
+        }
+        Update: {
+          age?: string | null
+          availability?: string | null
+          created_at?: string
+          email?: string
+          experience?: string | null
+          id?: string
+          interests?: string[] | null
+          location?: string | null
+          name?: string
+          phone?: string
+          skills?: string | null
+          status?: string | null
+          type?: string | null
+          updated_at?: string
+          why?: string | null
+        }
+        Relationships: []
+      }
+      campaigns: {
+        Row: {
+          category: string | null
+          created_at: string
+          description: string | null
+          end_date: string | null
+          goal_amount: number | null
+          id: string
+          image_url: string | null
+          raised_amount: number | null
+          start_date: string | null
+          status: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          goal_amount?: number | null
+          id?: string
+          image_url?: string | null
+          raised_amount?: number | null
+          start_date?: string | null
+          status?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          end_date?: string | null
+          goal_amount?: number | null
+          id?: string
+          image_url?: string | null
+          raised_amount?: number | null
+          start_date?: string | null
+          status?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          status: string | null
+          subject: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          status?: string | null
+          subject?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          status?: string | null
+          subject?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      themes: {
+        Row: {
+          content: string | null
+          created_at: string
+          description: string | null
+          featured: boolean | null
+          id: string
+          image_url: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          description?: string | null
+          featured?: boolean | null
+          id?: string
+          image_url?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          description?: string | null
+          featured?: boolean | null
+          id?: string
+          image_url?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      volunteer_opportunities: {
+        Row: {
+          application_deadline: string | null
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string
+          description: string | null
+          id: string
+          location: string | null
+          required_skills: string[] | null
+          status: string | null
+          time_commitment: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          application_deadline?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          required_skills?: string[] | null
+          status?: string | null
+          time_commitment?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          application_deadline?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          required_skills?: string[] | null
+          status?: string | null
+          time_commitment?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      volunteer_testimonials: {
+        Row: {
+          created_at: string
+          featured: boolean | null
+          id: string
+          image_url: string | null
+          testimonial: string
+          updated_at: string
+          volunteer_name: string
+          volunteer_role: string | null
+        }
+        Insert: {
+          created_at?: string
+          featured?: boolean | null
+          id?: string
+          image_url?: string | null
+          testimonial: string
+          updated_at?: string
+          volunteer_name: string
+          volunteer_role?: string | null
+        }
+        Update: {
+          created_at?: string
+          featured?: boolean | null
+          id?: string
+          image_url?: string | null
+          testimonial?: string
+          updated_at?: string
+          volunteer_name?: string
+          volunteer_role?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

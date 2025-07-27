@@ -1,0 +1,371 @@
+/* Mobile Responsive CSS - Koshish NGO Website */
+
+/* Base mobile-first approach */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure no horizontal overflow on mobile */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Mobile-optimized typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.875rem !important; /* 30px */
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important; /* 24px */
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important; /* 20px */
+    line-height: 1.4;
+  }
+  
+  p, span, div {
+    font-size: 1rem !important; /* 16px minimum for readability */
+    line-height: 1.5;
+  }
+  
+  /* Ensure text doesn't overflow */
+  .text-overflow-mobile {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+/* Touch-friendly elements */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button optimizations for mobile */
+@media (max-width: 768px) {
+  button, .btn, a[role="button"] {
+    min-height: 44px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+  
+  /* Full-width buttons on mobile */
+  .btn-mobile-full {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Mobile navigation optimizations */
+@media (max-width: 1024px) {
+  .mobile-menu {
+    position: fixed;
+    top: 64px; /* Height of navbar */
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    max-height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
+  
+  .mobile-menu-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f3f4f6;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Grid layouts for mobile */
+@media (max-width: 640px) {
+  .grid-mobile-1 {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-mobile-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem;
+  }
+}
+
+/* Card responsive layouts */
+@media (max-width: 768px) {
+  .card-mobile {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .card-grid-mobile {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Image responsiveness */
+.img-mobile-responsive {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+/* Hero section mobile adjustments */
+@media (max-width: 768px) {
+  .hero-mobile {
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  .hero-content-mobile {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .hero-title-mobile {
+    font-size: 1.875rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-description-mobile {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-buttons-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .hero-button-mobile {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    min-height: 44px;
+  }
+}
+
+/* Form optimizations for mobile */
+@media (max-width: 768px) {
+  .form-mobile input,
+  .form-mobile textarea,
+  .form-mobile select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    min-height: 44px;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .form-mobile label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+}
+
+/* Table responsiveness */
+@media (max-width: 768px) {
+  .table-mobile {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .table-mobile table {
+    min-width: 100%;
+  }
+  
+  .table-mobile th,
+  .table-mobile td {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Modal optimizations for mobile */
+@media (max-width: 768px) {
+  .modal-mobile {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+  
+  .modal-content-mobile {
+    padding: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+}
+
+/* Footer mobile optimizations */
+@media (max-width: 768px) {
+  .footer-mobile {
+    text-align: center;
+  }
+  
+  .footer-mobile .footer-section {
+    margin-bottom: 2rem;
+  }
+  
+  .footer-mobile .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .footer-mobile .social-links {
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+/* Utility classes for mobile spacing */
+@media (max-width: 768px) {
+  .p-mobile-4 { padding: 1rem !important; }
+  .px-mobile-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
+  .py-mobile-4 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+  .m-mobile-4 { margin: 1rem !important; }
+  .mx-mobile-4 { margin-left: 1rem !important; margin-right: 1rem !important; }
+  .my-mobile-4 { margin-top: 1rem !important; margin-bottom: 1rem !important; }
+  
+  .gap-mobile-4 { gap: 1rem !important; }
+  .space-y-mobile-4 > * + * { margin-top: 1rem !important; }
+  .space-x-mobile-4 > * + * { margin-left: 1rem !important; }
+}
+
+/* Hide elements on mobile if needed */
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+/* Show elements only on mobile */
+.show-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .show-mobile {
+    display: block;
+  }
+  
+  .show-mobile-flex {
+    display: flex !important;
+  }
+  
+  .show-mobile-grid {
+    display: grid !important;
+  }
+}
+
+/* Scrolling optimizations */
+.scroll-mobile {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Animation performance for mobile */
+@media (max-width: 768px) {
+  * {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+  
+  .no-animation-mobile {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Prevent zoom on input focus (iOS) */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  font-size: 16px;
+}
+
+/* Improve tap highlighting */
+* {
+  -webkit-tap-highlight-color: rgba(66, 153, 225, 0.3);
+}
+
+/* Ensure proper viewport handling */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+}
+
+/* Fix for iOS Safari bottom safe area */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Gallery mobile optimizations */
+@media (max-width: 768px) {
+  .gallery-grid-mobile {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  
+  .gallery-item-mobile {
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+}
+
+/* Stats section mobile */
+@media (max-width: 640px) {
+  .stats-mobile {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .stat-item-mobile {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .stat-number-mobile {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .stat-label-mobile {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+}

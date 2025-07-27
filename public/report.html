@@ -6,207 +6,255 @@
     <title>Reports - Koshish Charitable Trust</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             min-height: 100vh;
+        }
+        .hero {
+            position: relative;
+            width: 100vw;
+            min-height: 340px;
+            background: linear-gradient(120deg, #0a2540 60%, #0ea5e9 100%);
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .container {
-            background: white;
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(120deg, #0ea5e9cc 40%, #fff0 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            max-width: 1000px;
-            margin: 2rem;
+            color: #fff;
+            padding: 2.5rem 1rem 2rem 1rem;
+        }
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 2px 18px #0ea5e9aa;
+            margin-bottom: 1.2rem;
         }
         .header {
-            color: #0ea5e9;
-            font-size: 2.5rem;
+            color: #fff;
+            font-size: 2.7rem;
             font-weight: bold;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 12px #0ea5e9cc;
         }
         .subtitle {
-            color: #666;
+            color: #e0f2fe;
             font-size: 1.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 8px #0ea5e9cc;
         }
-        .back-link {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #0ea5e9;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background 0.3s ease;
+        .container.beautiful {
+            background: #fff;
+            padding: 2.5rem 2rem 2rem 2rem;
+            border-radius: 18px;
+            box-shadow: 0 8px 40px rgba(14,165,233,0.10);
+            max-width: 1100px;
+            margin: -80px auto 2rem auto;
+            position: relative;
+            z-index: 3;
         }
-        .back-link:hover {
-            background: #0284c7;
+        .stats-section.beautiful {
+            background: linear-gradient(90deg, #e0f7fa 60%, #fff 100%);
+            border-radius: 14px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 2px 12px #0ea5e91a;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
         }
-        .reports-grid {
+        .stats-title {
+            color: #0ea5e9;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+        .stats-grid.beautiful {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+        .stat-item.beautiful {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #0ea5e91a;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+            position: relative;
+        }
+        .stat-item.beautiful:hover {
+            box-shadow: 0 6px 18px #0ea5e93a;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .stat-icon {
+            width: 32px; height: 32px; margin: 0 auto 0.5rem auto; display: block;
+        }
+        .stat-icon.lives { background: url('https://cdn-icons-png.flaticon.com/512/1077/1077012.png') center/cover no-repeat; }
+        .stat-icon.funds { background: url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png') center/cover no-repeat; }
+        .stat-icon.projects { background: url('https://cdn-icons-png.flaticon.com/512/1828/1828919.png') center/cover no-repeat; }
+        .stat-icon.volunteers { background: url('https://cdn-icons-png.flaticon.com/512/1946/1946429.png') center/cover no-repeat; }
+        .stat-number { font-size: 2rem; font-weight: bold; color: #0ea5e9; }
+        .stat-label { color: #666; font-size: 0.95rem; margin-top: 0.5rem; }
+        .reports-section.beautiful { margin-top: 2.5rem; }
+        .section-title { color: #0ea5e9; font-size: 1.5rem; font-weight: 700; margin-bottom: 1.2rem; text-align:left; }
+        .reports-grid.beautiful {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
-        .report-card {
-            background: #f0f9ff;
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid #0ea5e9;
+        .report-card.pro {
+            background: linear-gradient(120deg, #e0f7fa 80%, #fff 100%);
+            box-shadow: 0 4px 24px rgba(14,165,233,0.08);
+            border-left: 5px solid #0ea5e9;
+            transition: box-shadow 0.2s, transform 0.2s;
+            position:relative;
+            border-radius: 14px;
+            padding: 2.2rem 1.5rem 1.5rem 1.5rem;
             text-align: left;
-        }
-        .report-title {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-        .report-description {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-        .report-meta {
+            overflow: hidden;
+            min-height: 220px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1rem;
+            flex-direction: column;
+            justify-content: flex-start;
+            animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both;
         }
-        .report-date {
-            color: #0ea5e9;
-            font-size: 0.8rem;
-            font-weight: bold;
+        .report-card.pro:hover {
+            box-shadow: 0 8px 32px rgba(14,165,233,0.18);
+            transform: translateY(-4px) scale(1.02);
+            background: linear-gradient(120deg, #b2ebf2 80%, #fff 100%);
         }
-        .download-link {
-            background: #0ea5e9;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.8rem;
-            transition: background 0.3s ease;
+        .report-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.7rem; }
+        .badge { background:#e0f2fe; color:#0284c7; font-size:0.85rem; font-weight:600; padding:0.3em 0.8em; border-radius:1em; margin-right:0.5em; }
+        .pdf-icon { margin-left:auto; }
+        .report-title { font-weight: bold; color: #333; margin-bottom: 1rem; font-size: 1.1rem; }
+        .report-description { color: #666; font-size: 0.97rem; margin-bottom: 1rem; }
+        .download-link.pro { display:inline-flex; align-items:center; gap:0.4em; background:#0ea5e9; color:white; font-weight:600; border-radius:6px; padding:0.5rem 1.2rem; text-decoration:none; font-size:0.95rem; margin-top:1.1rem; transition:background 0.2s; box-shadow: 0 2px 8px #0ea5e91a; }
+        .download-link.pro:hover { background:#0284c7; }
+        .back-link { display: inline-block; padding: 12px 24px; background: #0ea5e9; color: white; text-decoration: none; border-radius: 8px; transition: background 0.3s ease; margin-top: 2.5rem; font-weight: 600; font-size: 1.1rem; }
+        .back-link:hover { background: #0284c7; }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-        .download-link:hover {
-            background: #0284c7;
-        }
-        .stats-section {
-            background: #f8fafc;
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            border: 2px solid #e2e8f0;
-        }
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #0ea5e9;
-        }
-        .stat-label {
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+        @media (max-width: 700px) {
+            .container.beautiful { padding: 1.2rem 0.2rem; }
+            .hero-content { padding: 1.2rem 0.2rem; }
+            .header { font-size: 2rem; }
+            .stats-section.beautiful { padding: 1.2rem 0.5rem; }
+            .reports-grid.beautiful { gap: 1rem; }
+            .report-card.pro { padding: 1.2rem 0.7rem 1rem 0.7rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="header">Annual Reports & Impact</h1>
-        <p class="subtitle">Transparency and accountability in all our charitable activities</p>
-        
-        <div class="stats-section">
-            <h2 style="color: #0ea5e9; margin-bottom: 1.5rem;">Our Impact in Numbers (2024)</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
+    <div class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="/logo/logo.png" alt="Koshish Logo" class="hero-logo" />
+            <h1 class="header">Annual Reports & Impact</h1>
+            <p class="subtitle">Transparency and accountability in all our charitable activities</p>
+        </div>
+    </div>
+    <div class="container beautiful">
+        <div class="stats-section beautiful">
+            <h2 class="stats-title">Our Impact in Numbers (2024)</h2>
+            <div class="stats-grid beautiful">
+                <div class="stat-item beautiful">
+                    <div class="stat-icon lives"></div>
                     <div class="stat-number">15,420</div>
                     <div class="stat-label">Lives Impacted</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item beautiful">
+                    <div class="stat-icon funds"></div>
                     <div class="stat-number">₹12.5L</div>
                     <div class="stat-label">Funds Raised</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item beautiful">
+                    <div class="stat-icon projects"></div>
                     <div class="stat-number">45</div>
                     <div class="stat-label">Projects Completed</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item beautiful">
+                    <div class="stat-icon volunteers"></div>
                     <div class="stat-number">180</div>
                     <div class="stat-label">Volunteers</div>
                 </div>
             </div>
         </div>
-        
-        <div class="reports-grid">
-            <div class="report-card">
-                <h3 class="report-title">Annual Report 2024</h3>
-                <p class="report-description">Comprehensive overview of all our activities, financial statements, and impact assessment for the year 2024.</p>
-                <div class="report-meta">
-                    <span class="report-date">Published: Jan 2025</span>
-                    <a href="#" class="download-link">Download PDF</a>
+        <div class="reports-section beautiful">
+            <h2 class="section-title">Annual Reports</h2>
+            <div class="reports-grid beautiful">
+                <div class="report-card pro">
+                    <div class="report-header">
+                        <span class="badge">2021-22</span>
+                        <svg class="pdf-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path fill="#e53e3e" d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 13.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z"/></svg>
+                    </div>
+                    <h3 class="report-title">Annual Report 2021-22</h3>
+                    <p class="report-description">Comprehensive overview of activities, financials, and impact for 2021-22.</p>
+                    <a href="/report/Annual Report 2021-22.pdf" class="download-link pro" target="_blank">Download PDF</a>
+                </div>
+                <div class="report-card pro">
+                    <div class="report-header">
+                        <span class="badge">2022-23</span>
+                        <svg class="pdf-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path fill="#e53e3e" d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 13.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z"/></svg>
+                    </div>
+                    <h3 class="report-title">Annual Report 2022-23</h3>
+                    <p class="report-description">Comprehensive overview of activities, financials, and impact for 2022-23.</p>
+                    <a href="/report/KCT-Annual Report 2022-23.pdf" class="download-link pro" target="_blank">Download PDF</a>
+                </div>
+                <div class="report-card pro">
+                    <div class="report-header">
+                        <span class="badge">2023-24</span>
+                        <svg class="pdf-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path fill="#e53e3e" d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 13.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z"/></svg>
+                    </div>
+                    <h3 class="report-title">Annual Report 2023-24</h3>
+                    <p class="report-description">Comprehensive overview of activities, financials, and impact for 2023-24.</p>
+                    <a href="/report/KCT-Annual Report 2023-24(F).docx.pdf" class="download-link pro" target="_blank">Download PDF</a>
                 </div>
             </div>
-            
-            <div class="report-card">
-                <h3 class="report-title">Financial Transparency Report 2024</h3>
-                <p class="report-description">Detailed breakdown of all donations received and their utilization across various programs and administrative costs.</p>
-                <div class="report-meta">
-                    <span class="report-date">Published: Dec 2024</span>
-                    <a href="#" class="download-link">Download PDF</a>
+            <h2 class="section-title" style="margin-top:2.5rem;">Audit Reports</h2>
+            <div class="reports-grid beautiful">
+                <div class="report-card pro">
+                    <div class="report-header">
+                        <span class="badge">2021-22</span>
+                        <svg class="pdf-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path fill="#e53e3e" d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 13.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z"/></svg>
+                    </div>
+                    <h3 class="report-title">Audit Report 2021-22</h3>
+                    <p class="report-description">Detailed audit of accounts and compliance for the year 2021-22.</p>
+                    <a href="/report/KCT Audit Report 2021-22.pdf" class="download-link pro" target="_blank">Download PDF</a>
                 </div>
-            </div>
-            
-            <div class="report-card">
-                <h3 class="report-title">Education Program Impact Study</h3>
-                <p class="report-description">Analysis of our education initiatives and their long-term impact on beneficiary communities in Bihar.</p>
-                <div class="report-meta">
-                    <span class="report-date">Published: Nov 2024</span>
-                    <a href="#" class="download-link">Download PDF</a>
+                <div class="report-card pro">
+                    <div class="report-header">
+                        <span class="badge">2022-23</span>
+                        <svg class="pdf-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path fill="#e53e3e" d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 13.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z"/></svg>
+                    </div>
+                    <h3 class="report-title">Audit Report 2022-23</h3>
+                    <p class="report-description">Detailed audit of accounts and compliance for the year 2022-23.</p>
+                    <a href="/report/KCT Audit Report 2022-23.pdf" class="download-link pro" target="_blank">Download PDF</a>
                 </div>
-            </div>
-            
-            <div class="report-card">
-                <h3 class="report-title">Healthcare Access Initiative Report</h3>
-                <p class="report-description">Outcomes and reach of our mobile health clinics and medical aid programs in rural areas.</p>
-                <div class="report-meta">
-                    <span class="report-date">Published: Oct 2024</span>
-                    <a href="#" class="download-link">Download PDF</a>
-                </div>
-            </div>
-            
-            <div class="report-card">
-                <h3 class="report-title">Winter Relief Campaign 2023-24</h3>
-                <p class="report-description">Complete report on our winter relief efforts, including distribution details and beneficiary feedback.</p>
-                <div class="report-meta">
-                    <span class="report-date">Published: Mar 2024</span>
-                    <a href="#" class="download-link">Download PDF</a>
-                </div>
-            </div>
-            
-            <div class="report-card">
-                <h3 class="report-title">Volunteer Engagement Report</h3>
-                <p class="report-description">Statistics and insights about our volunteer program, training initiatives, and community engagement efforts.</p>
-                <div class="report-meta">
-                    <span class="report-date">Published: Sep 2024</span>
-                    <a href="#" class="download-link">Download PDF</a>
+                <div class="report-card pro">
+                    <div class="report-header">
+                        <span class="badge">2023-24</span>
+                        <svg class="pdf-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24"><path fill="#e53e3e" d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.828A2 2 0 0 0 19.414 7.414l-4.828-4.828A2 2 0 0 0 13.172 2H6zm6 1.414L18.586 10H14a2 2 0 0 1-2-2V3.414z"/></svg>
+                    </div>
+                    <h3 class="report-title">Audit Report 2023-24</h3>
+                    <p class="report-description">Detailed audit of accounts and compliance for the year 2023-24.</p>
+                    <a href="/report/KCT Audit Report 2023-24.pdf" class="download-link pro" target="_blank">Download PDF</a>
                 </div>
             </div>
         </div>
-        
         <a href="/" class="back-link">← Back to Home</a>
     </div>
 </body>

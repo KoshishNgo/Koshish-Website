@@ -18,10 +18,51 @@ import {
   FileText,
   Star,
   Trophy,
-  Banknote
+  Banknote,
+  ChevronUp
 } from "lucide-react";
 import { Helmet } from 'react-helmet-async';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+// Back to Top Button Component
+const BackToTopButton = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Show button when page is scrolled down
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <>
+      {isVisible && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-koshish-blue to-purple-600 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 ease-in-out hover:from-purple-600 hover:to-koshish-blue group"
+          aria-label="Back to top"
+        >
+          <ChevronUp className="w-6 h-6 group-hover:animate-bounce" />
+        </button>
+      )}
+    </>
+  );
+};
 
 const About = () => {
   const team = [
@@ -377,8 +418,287 @@ For his outstanding contributions to social justice, governance, and development
         </div>
       </section>
 
-      {/* Awards & Recognition */}
+      {/* Legal & Compliance */}
       <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Legal & Compliance</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Maintaining the highest standards of legal compliance and transparency in all our operations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            {/* Compliance Overview */}
+            <Card className="bg-gradient-to-br from-blue-50 to-indigo-100 border-2 border-blue-200">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-bold text-koshish-blue mb-6 flex items-center">
+                  <Shield className="w-6 h-6 mr-3" />
+                  Compliance Framework
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-koshish-blue rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">Complete adherence to all regulatory requirements under Indian law</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-koshish-blue rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">Regular audits and financial transparency reporting</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-koshish-blue rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">Comprehensive policy framework for governance</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-koshish-blue rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">Annual compliance reviews and policy updates</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Legal Status */}
+            <Card className="bg-gradient-to-br from-green-50 to-emerald-100 border-2 border-green-200">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-bold text-koshish-blue mb-6 flex items-center">
+                  <Scale className="w-6 h-6 mr-3" />
+                  Legal Standing
+                </h3>
+                <div className="space-y-4">
+                  <div className="bg-white/70 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2">Registration Status</h4>
+                    <p className="text-gray-600 text-sm">Fully registered charitable trust with all legal compliances up to date</p>
+                  </div>
+                  <div className="bg-white/70 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2">Tax Compliance</h4>
+                    <p className="text-gray-600 text-sm">All IT returns filed regularly with proper documentation</p>
+                  </div>
+                  <div className="bg-white/70 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 mb-2">FCRA Compliance</h4>
+                    <p className="text-gray-600 text-sm">Valid FCRA registration with timely renewals and reporting</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Document Categories */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {/* Organizational Policies */}
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                    <FileText className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-koshish-blue">Organizational Policies</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">Comprehensive policies governing our operations and conduct</p>
+                <div className="space-y-2">
+                  <a 
+                    href="/legal compliance/GENDER POLICY OF KOSHISH CHARITABLE TRUST.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block text-koshish-blue hover:text-blue-600 text-sm hover:underline transition-colors"
+                  >
+                    • Gender Policy
+                  </a>
+                  <a 
+                    href="/legal compliance/HR POLICY OF KOSHISH CHARITABLE TRUST.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block text-koshish-blue hover:text-blue-600 text-sm hover:underline transition-colors"
+                  >
+                    • HR Policy
+                  </a>
+                  <a 
+                    href="/legal compliance/Koshish communications policy.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block text-koshish-blue hover:text-blue-600 text-sm hover:underline transition-colors"
+                  >
+                    • Communications Policy
+                  </a>
+                  <a 
+                    href="/legal compliance/staff agreement.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block text-koshish-blue hover:text-blue-600 text-sm hover:underline transition-colors"
+                  >
+                    • Staff Agreement
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Financial Policies */}
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-4">
+                    <CreditCard className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-koshish-blue">Financial Management</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">Policies ensuring transparent financial operations</p>
+                <div className="space-y-2">
+                  <a 
+                    href="/legal compliance/Koshish finance Policy.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block text-koshish-blue hover:text-blue-600 text-sm hover:underline transition-colors"
+                  >
+                    • Finance Policy
+                  </a>
+                  <a 
+                    href="/legal compliance/Koshish Fixed assets policy.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block text-koshish-blue hover:text-blue-600 text-sm hover:underline transition-colors"
+                  >
+                    • Fixed Assets Policy
+                  </a>
+                  <a 
+                    href="/legal compliance/Koshish Procurement policy f.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block text-koshish-blue hover:text-blue-600 text-sm hover:underline transition-colors"
+                  >
+                    • Procurement Policy
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Legal Documents */}
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                    <Scale className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-koshish-blue">Legal Documentation</h3>
+                </div>
+                <p className="text-gray-600 text-sm mb-4">Official certificates and regulatory documents</p>
+                <div className="space-y-2">
+                  <a 
+                    href="/legal compliance/FCRA-Renewal-Certificate 2021.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block text-koshish-blue hover:text-blue-600 text-sm hover:underline transition-colors"
+                  >
+                    • FCRA Renewal Certificate 2021
+                  </a>
+                  <a 
+                    href="/legal compliance/Annexure Desirable Norms (1).pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block text-koshish-blue hover:text-blue-600 text-sm hover:underline transition-colors"
+                  >
+                    • Annexure Desirable Norms
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Tax Returns Section */}
+          <Card className="mb-8">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold text-koshish-blue mb-6 flex items-center">
+                <FileText className="w-6 h-6 mr-3" />
+                Income Tax Returns & Financial Compliance
+              </h3>
+              <p className="text-gray-600 mb-6">
+                We maintain complete transparency in our financial operations through regular filing of income tax returns 
+                and compliance with all financial regulations.
+              </p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a 
+                  href="/legal compliance/IT Return-2024.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-blue-300 group"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-bold text-koshish-blue">IT Return 2024</h4>
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <FileText className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                  <p className="text-gray-600 text-sm">Latest financial year tax return</p>
+                  <div className="mt-3 text-blue-600 text-sm font-medium">View Document →</div>
+                </a>
+
+                <a 
+                  href="/legal compliance/IT Return-2023.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-gradient-to-r from-green-50 to-green-100 border-2 border-green-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-green-300 group"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-bold text-koshish-blue">IT Return 2023</h4>
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <FileText className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                  <p className="text-gray-600 text-sm">Previous year tax compliance</p>
+                  <div className="mt-3 text-green-600 text-sm font-medium">View Document →</div>
+                </a>
+
+                <a 
+                  href="/legal compliance/IT Return-2022.pdf" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="bg-gradient-to-r from-purple-50 to-purple-100 border-2 border-purple-200 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:border-purple-300 group"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-bold text-koshish-blue">IT Return 2022</h4>
+                    <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <FileText className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
+                  <p className="text-gray-600 text-sm">Historical tax documentation</p>
+                  <div className="mt-3 text-purple-600 text-sm font-medium">View Document →</div>
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Transparency Statement */}
+          <Card className="bg-gradient-to-r from-koshish-blue to-purple-600 text-white border-0">
+            <CardContent className="p-8 text-center">
+              <div className="inline-block bg-white/20 backdrop-blur-sm rounded-full p-4 mb-6">
+                <Shield className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Commitment to Transparency</h3>
+              <p className="text-lg text-blue-100 mb-6 max-w-3xl mx-auto">
+                All our legal and compliance documents are readily available for public review. We believe in complete 
+                transparency and accountability in our operations, ensuring that donors and stakeholders have full 
+                access to our organizational policies and financial records.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                  <div className="text-2xl font-bold text-white mb-2">100%</div>
+                  <div className="text-blue-100">Transparency</div>
+                </div>
+                <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                  <div className="text-2xl font-bold text-white mb-2">13+</div>
+                  <div className="text-blue-100">Policy Documents</div>
+                </div>
+                <div className="bg-white/10 rounded-xl p-4 backdrop-blur-sm">
+                  <div className="text-2xl font-bold text-white mb-2">28+</div>
+                  <div className="text-blue-100">Years of Compliance</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Awards & Recognition */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-koshish-blue mb-4">Awards & Recognition</h2>
@@ -563,7 +883,7 @@ For his outstanding contributions to social justice, governance, and development
               {
                 name: "Ritwiz Kumar",
                 role: "Program Manager and HR Manager",
-                image: "/team/Ritwiz.jpeg",
+                image: "/team/ritwiz.jpg",
                 quote: "Empowering our team empowers the communities we serve."
               },
               {
@@ -652,6 +972,7 @@ For his outstanding contributions to social justice, governance, and development
       </section>
 
       <Footer />
+      <BackToTopButton />
     </div>
   );
 };
