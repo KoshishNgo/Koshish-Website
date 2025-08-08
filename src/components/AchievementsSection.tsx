@@ -45,7 +45,7 @@ useEffect(() => {
       description: "Distinguished recognition for excellence in community service, social impact, and sustainable development",
       icon: <Star className="w-8 h-8 text-amber-500" />,
       year: "2000",
-      image: "/certificates/certificate-excellence.jpg.pdf",
+      image: "/certificates/certificate-excellence.pdf",
       category: "Community Impact",
       priority: 1
     },
@@ -54,7 +54,7 @@ useEffect(() => {
       description: "Official government recognition and registration certificate for charitable trust operations",
       icon: <FileText className="w-8 h-8 text-purple-500" />,
       year: "2004",
-      image: "/certificates/certificate-identification.jpg.pdf",
+      image: "/certificates/certificate-identification.pdf",
       category: "Official Recognition",
       priority: 2
     },
@@ -63,7 +63,7 @@ useEffect(() => {
       description: "Recognized for outstanding contribution to legal empowerment and access to justice in underserved communities",
       icon: <Trophy className="w-8 h-8 text-yellow-500" />,
       year: "2015",
-      image: "/certificates/namati-justice-prize.jpg.pdf",
+      image: "/certificates/namati-justice-prize.pdf",
       category: "Legal Empowerment",
       priority: 3
     },
@@ -72,7 +72,7 @@ useEffect(() => {
       description: "Norms compliance certification for transparency, accountability, and good governance standards",
       icon: <Shield className="w-8 h-8 text-blue-500" />,
       year: "2015",
-      image: "/certificates/credibility-alliance.jpg.pdf",
+      image: "/certificates/credibility-alliance.pdf",
       category: "Transparency & Governance",
       priority: 4
     },
@@ -81,7 +81,7 @@ useEffect(() => {
       description: "Advanced tier certification recognizing exceptional organizational credibility and impact",
       icon: <Award className="w-8 h-8 text-green-500" />,
       year: "2015",
-      image: "/certificates/credibility-alliance-2.jpg.pdf",
+      image: "/certificates/credibility-alliance-2.pdf",
       category: "Excellence Recognition",
       priority: 5
     },
@@ -90,7 +90,7 @@ useEffect(() => {
       description: "Bihar State Disaster Management certification for emergency response and disaster relief capabilities",
       icon: <Medal className="w-8 h-8 text-indigo-500" />,
       year: "2018",
-      image: "/certificates/bsdm-certificate.jpg.pdf",
+      image: "/certificates/bsdm-certificate.pdf",
       category: "Disaster Management",
       priority: 6
     }
