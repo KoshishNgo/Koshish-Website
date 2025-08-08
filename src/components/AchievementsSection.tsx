@@ -8,22 +8,26 @@ const AchievementsSection = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+useEffect(() => {
+  // Always show achievements on mobile (width < 768px)
+  if (window.innerWidth < 768) {
+    setIsVisible(true);
+    return;
+  }
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+      }
+    },
+    { threshold: 0.2 }
+  );
+  if (sectionRef.current) {
+    observer.observe(sectionRef.current);
+  }
+  return () => observer.disconnect();
+}, []);
 
   const openCertificateModal = (achievement: any) => {
     setSelectedCertificate(achievement);
@@ -311,12 +315,25 @@ const AchievementsSection = () => {
                     </button>
                   </div>
                   
-                  {/* Large PDF Preview - Always Visible */}
+                  {/* PDF Preview: Show only on desktop, hide on mobile */}
                   <div className="relative bg-white rounded-b-xl">
+                    <div className="block md:hidden p-8 text-center bg-gray-100 rounded-b-xl">
+                      <FileText className="w-20 h-20 text-gray-400 mx-auto mb-4" />
+                      <h4 className="text-xl font-semibold text-gray-700 mb-2">
+                        PDF Preview Not Available on Mobile
+                      </h4>
+                      <p className="text-gray-600 mb-6">
+                        Please use the buttons above to view or download the certificate.
+                      </p>
+                      <div className="text-sm text-gray-500 bg-white p-4 rounded-lg">
+                        <strong>Certificate Details:</strong><br/>
+                        <span>{selectedCertificate.description}</span>
+                      </div>
+                    </div>
                     <iframe
                       id="certificate-iframe"
                       src={`${selectedCertificate.image}#toolbar=1&navpanes=1&scrollbar=1&page=1&view=FitH`}
-                      className="w-full h-[70vh] min-h-[500px] rounded-b-xl border-0"
+                      className="w-full h-[70vh] min-h-[500px] rounded-b-xl border-0 hidden md:block"
                       title={selectedCertificate.title}
                       style={{
                         display: 'block',
@@ -331,24 +348,6 @@ const AchievementsSection = () => {
                         if (fallback) fallback.style.display = 'block';
                       }}
                     />
-                    
-                    {/* Fallback for browsers that don't support PDF preview */}
-                    <div 
-                      className="hidden p-8 text-center bg-gray-100 rounded-b-xl"
-                      id="pdf-fallback"
-                    >
-                      <FileText className="w-20 h-20 text-gray-400 mx-auto mb-4" />
-                      <h4 className="text-xl font-semibold text-gray-700 mb-2">
-                        Certificate Preview Not Available
-                      </h4>
-                      <p className="text-gray-600 mb-6">
-                        Your browser doesn't support PDF preview. Please use the buttons above to view or download the certificate.
-                      </p>
-                      <div className="text-sm text-gray-500 bg-white p-4 rounded-lg">
-                        <strong>Certificate Details:</strong><br/>
-                        <span>{selectedCertificate.description}</span>
-                      </div>
-                    </div>
                   </div>
                   
                   {/* Certificate Information */}
