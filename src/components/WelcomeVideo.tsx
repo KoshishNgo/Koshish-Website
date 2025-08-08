@@ -10,7 +10,7 @@ interface WelcomeVideoProps {
 }
 
 const WelcomeVideo = ({ 
-  videoUrl = "/Welcome video.mp4", 
+  videoUrl = "/welcome-video.mp4",
   thumbnailUrl = "/logo/logo.png",
   title = "Welcome Message from Our Secretary",
   description = "Watch our secretary's heartfelt message about Koshish Charitable Trust's mission and impact."

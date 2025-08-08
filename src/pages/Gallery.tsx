@@ -317,7 +317,7 @@ const Gallery = () => {
                   className="w-full h-full object-cover"
                   poster="/logo/logo.png"
                 >
-                  <source src="/video 2.mp4" type="video/mp4" />
+                  <source src="/video-2.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -329,14 +329,14 @@ const Gallery = () => {
 
             <div className="relative">
               <div className="aspect-video bg-gray-200 rounded-lg overflow-hidden">
-                <video 
-                  controls
-                  className="w-full h-full object-cover"
-                  poster="/logo/logo.png"
-                >
-                  <source src="/video 3.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/thCHLpHLv3w"
+                  title="History of Koshish"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
               <div className="mt-4">
                 <h3 className="text-xl font-semibold text-koshish-blue">History of Koshish</h3>
